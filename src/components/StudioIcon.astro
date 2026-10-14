@@ -1,0 +1,16 @@
+---
+interface Props {index:number}
+const paths=[
+ 'M4 6h24v20H4z M4 12h24 M9 9h.1 M13 9h.1 M9 17h6v5H9z M19 17h5 M19 21h5',
+ 'M7 25 25 7 M10 7h15v15 M6 16v10h10',
+ 'M4 7h15v13H4z M13 12h15v13H13 M8 11h7 M11 9v7 M6 16l5-7 5 7 M20 16l5 6 M25 16l-5 6',
+ 'M7 5h18v22H7z M11 10h10 M11 15h10 M11 20h6',
+ 'M23 23l6 6 M23 14a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M10 14h8 M14 10v8',
+ 'M18 3 7 18h8l-1 11 11-16h-8z',
+ 'M27 14a11 11 0 0 0-20-5 M5 3v8h8 M5 18a11 11 0 0 0 20 5 M27 29v-8h-8',
+ 'M5 10h22 M10 5l-5 5 5 5 M27 22H5 M22 17l5 5-5 5',
+ 'M16 3 29 16 16 29 3 16z M10 16h12 M16 10v12',
+ 'M25 13c0 7-9 16-9 16S7 20 7 13a9 9 0 0 1 18 0 M20 13a4 4 0 1 1-8 0 4 4 0 0 1 8 0',
+];
+---
+<svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={paths[Astro.props.index % paths.length]}/></svg>

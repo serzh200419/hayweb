@@ -12,7 +12,8 @@
     "build:production": "node scripts/build-production.mjs",
     "verify:hosting": "node scripts/verify-hosting.mjs",
     "test:requests": "node --test tests/project-request.test.mjs",
-    "test:offer": "node scripts/offer-browser-check.mjs"
+    "test:offer": "node scripts/offer-browser-check.mjs",
+    "test:studio": "node scripts/studio-browser-check.mjs"
   },
   "repository": {
     "type": "git",

@@ -31,8 +31,8 @@ for (const lang of ['hy','en','ru']) {
   assert(html.includes(formatted),`${lang}: ${price}`);
  }
  for(const [,data] of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) JSON.parse(data);
- assert(!/<script[^>]+src=/.test(html),'Unexpected browser JavaScript');
- console.log(`PASS ${lang}: static content, 8 FAQs, links, metadata, prices, encoded messages, no browser JS`);
+ assert.equal((html.match(/<script[^>]+type="module"/g)||[]).length,1,'Only the shared decorative module belongs on homepages');
+ console.log(`PASS ${lang}: static content, 8 FAQs, links, metadata, prices, encoded messages, one lightweight decorative module`);
 }
 assert.equal(titles.size,3);
 assert(read('index.html').includes('<html lang="hy">'));
@@ -42,7 +42,7 @@ assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,28);
 console.log('PASS root entry, reciprocal language alternatives, sitemap and robots');
 const rgb = h=>h.match(/\w\w/g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
 const luminance=h=>rgb(h).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
-for(const [fg,bg] of [['142238','ffffff'],['536174','f6f9fc'],['007f83','ffffff'],['007f83','f6f9fc'],['0b1730','2dd4bf'],['c6cfdb','0b1730'],['9fb4cd','0b1730'],['2dd4bf','0b1730'],['ffffff','a53d32'],['76251f','fff1ed']]) {
+for(const [fg,bg] of [['006e73','eaf6f1'],['006e73','fafbf8'],['536174','eaf6f1'],['173c45','2dd4bf'],['142238','ffffff'],['536174','f6f9fc'],['007f83','ffffff'],['007f83','f6f9fc'],['0b1730','2dd4bf'],['c6cfdb','0b1730'],['9fb4cd','0b1730'],['2dd4bf','0b1730'],['ffffff','a53d32'],['76251f','fff1ed']]) {
  const values=[luminance(fg),luminance(bg)].sort((a,b)=>b-a);const contrast=(values[0]+.05)/(values[1]+.05);
  assert(contrast>=4.5,`${fg} on ${bg}: ${contrast}`);console.log(`PASS contrast #${fg} on #${bg}: ${contrast.toFixed(2)}:1`);
 }

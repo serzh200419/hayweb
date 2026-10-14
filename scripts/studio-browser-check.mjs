@@ -1,0 +1,29 @@
+import {chromium} from '@playwright/test';
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+const base=process.env.PREVIEW_URL||'http://127.0.0.1:4330';
+const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const errors=[];const shifts={};
+try{
+ // Full-page screenshots are captured without motion, as stable review artifacts.
+ for(const lang of ['hy','en','ru'])for(const width of [390,1440])for(const [name,path] of [['home',''],['services','services/'],['contact','contact/'],['article',`blog/${{hy:'biznes-kayqi-arjeq',en:'business-website-cost',ru:'stoimost-saita-dlya-biznesa'}[lang]}/`]]){
+  const page=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});page.on('pageerror',e=>errors.push(e.message));await page.goto(`${base}/${lang}/${path}`);await page.evaluate(()=>document.fonts.ready);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  await page.screenshot({path:`artifacts/studio-${lang}-${name}-${width}.png`,fullPage:true});await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:`artifacts/studio-${lang}-${name}-${width}-top.png`});await page.close();
+ }
+ console.log('PASS stable desktop/mobile screenshots: home, Services, Contact and article in all locales');
+ const desktop=await browser.newPage({viewport:{width:1440,height:1000}});desktop.on('pageerror',e=>errors.push(e.message));await desktop.addInitScript(()=>{window.__studioShifts=0;new PerformanceObserver(list=>{for(const e of list.getEntries())if(!e.hadRecentInput)window.__studioShifts+=e.value;}).observe({type:'layout-shift',buffered:true});});
+ await desktop.goto(base+'/en/');await desktop.evaluate(()=>document.fonts.ready);await desktop.waitForTimeout(1400);
+ const primary=desktop.locator('.hero .actions .primary');assert(await primary.isVisible());assert.equal(await primary.evaluate(el=>getComputedStyle(el).animationName),'none');
+ const box=await desktop.locator('.concept').boundingBox();await desktop.mouse.move(box.x+box.width*.8,box.y+box.height*.4);await desktop.waitForTimeout(200);assert(await desktop.locator('.cursor-accent').isVisible());assert.equal(await desktop.locator('.cursor-accent').evaluate(el=>getComputedStyle(el).pointerEvents),'none');assert((await desktop.locator('.concept').getAttribute('style')).includes('--visual-x'));
+ assert.notEqual(await primary.evaluate(el=>getComputedStyle(el).cursor),'none');await primary.hover();await desktop.waitForTimeout(100);assert.equal(await desktop.locator('.cursor-accent').getAttribute('data-interactive'),'true');
+ await desktop.evaluate(()=>document.documentElement.dispatchEvent(new PointerEvent('pointerleave')));assert(await desktop.locator('.cursor-accent').isHidden());
+ await desktop.evaluate(()=>{window.__studioReveals=0;document.addEventListener('animationstart',e=>{if(e.animationName==='studio-arrive')window.__studioReveals++;});});
+ await desktop.locator('.needs-band').scrollIntoViewIfNeeded();await desktop.waitForTimeout(500);assert((await desktop.evaluate(()=>window.__studioReveals))>0);const seen=await desktop.evaluate(()=>window.__studioReveals);await desktop.evaluate(()=>scrollTo(0,0));await desktop.waitForTimeout(300);await desktop.locator('.needs-band').scrollIntoViewIfNeeded();await desktop.waitForTimeout(500);assert.equal(await desktop.evaluate(()=>window.__studioReveals),seen);
+ shifts.desktop=await desktop.evaluate(()=>window.__studioShifts);assert(shifts.desktop<.1);await desktop.emulateMedia({reducedMotion:'reduce'});await desktop.mouse.move(200,300);assert.equal(await desktop.locator('.cursor-accent').count(),0);assert.equal(await desktop.locator('.desktop-frame').evaluate(el=>getComputedStyle(el).animationName),'none');await desktop.close();
+ console.log('PASS actual desktop interaction: native cursor retained, halo, pointer visual, one-time reveals, reduced-motion cleanup');
+ const touch=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});await touch.addInitScript(()=>{window.__studioShifts=0;new PerformanceObserver(list=>{for(const e of list.getEntries())if(!e.hadRecentInput)window.__studioShifts+=e.value;}).observe({type:'layout-shift',buffered:true});});await touch.goto(base+'/hy/');await touch.evaluate(()=>document.fonts.ready);await touch.waitForTimeout(1500);await touch.tap('.hero h1');assert.equal(await touch.locator('.cursor-accent').count(),0);assert(await touch.evaluate(()=>matchMedia('(pointer:coarse)').matches));shifts.touch=await touch.evaluate(()=>window.__studioShifts);assert(shifts.touch<.1);await touch.close();
+ const paths=[...readFileSync('dist/sitemap.xml','utf8').matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
+ const nojs=await browser.newPage({javaScriptEnabled:false,viewport:{width:390,height:844}});
+ for(const path of paths){await nojs.goto(base+path);assert(await nojs.locator('h1').isVisible());assert.equal(await nojs.locator('h1').evaluate(el=>getComputedStyle(el).opacity),'1');assert(await nojs.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));if(path.endsWith('/contact/')){assert(await nojs.locator('a[href^="mailto:"]:visible').first().isVisible());assert(await nojs.locator('form').isHidden());}if(/^\/(en|hy|ru)\/$/.test(path)){await nojs.locator('summary').first().click();assert(await nojs.locator('details').first().getAttribute('open')!==null);}}
+ await nojs.close();assert.deepEqual(errors,[]);writeFileSync('artifacts/studio-interaction-results.json',JSON.stringify({shifts,errors},null,2));console.log('PASS touch without cursor effects, all canonical pages without JS, native FAQ, no errors, measured shifts '+JSON.stringify(shifts));
+}finally{await browser.close();}

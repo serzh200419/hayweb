@@ -1,5 +1,5 @@
 import {chromium} from '@playwright/test';import {mkdir} from 'node:fs/promises';import assert from 'node:assert/strict';
-await mkdir('artifacts',{recursive:true});const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});const root='http://127.0.0.1:4321';
+await mkdir('artifacts',{recursive:true});const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});const root=process.env.PREVIEW_URL||'http://127.0.0.1:4321';
 const slugs={en:['website-and-instagram','business-website-cost'],hy:['kayq-ev-instagram','biznes-kayqi-arjeq'],ru:['sait-i-instagram','stoimost-saita-dlya-biznesa']};
 try{
 for(const lang of ['hy','en','ru']){

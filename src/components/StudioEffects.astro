@@ -1,0 +1,35 @@
+<script>
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+ const fine=matchMedia('(hover: hover) and (pointer: fine)');
+ let observer:IntersectionObserver|undefined;
+ let stopPointer=()=>{};
+ let idle:number|undefined;
+ const reveal=()=>{
+  if(reduce.matches||!('IntersectionObserver' in window))return;
+  const targets=[...document.querySelectorAll<HTMLElement>('.benefit,.service,.steps li,.about-mark,.service-group,.principles article,.article-card,.service-path-grid article')];
+  if(!targets.length)return;
+  let remaining=targets.length;
+  observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;const el=entry.target as HTMLElement;el.classList.add('studio-reveal');el.addEventListener('animationend',()=>el.classList.remove('studio-reveal'),{once:true});observer!.unobserve(el);if(!--remaining)observer!.disconnect();}},{threshold:0.12});
+  targets.forEach(el=>observer!.observe(el));
+ };
+ const pointer=()=>{
+  stopPointer();if(reduce.matches||!fine.matches)return;
+  const controller=new AbortController();const {signal}=controller;
+  let halo:HTMLDivElement|undefined;let frame=0;let x=0;let y=0;let active=false;let overControl=false;
+  const visual=document.querySelector<HTMLElement>('.concept');let bounds:DOMRect|undefined;let vx=0;let vy=0;
+  const reset=()=>{cancelAnimationFrame(frame);frame=0;active=false;if(halo)halo.hidden=true;visual?.style.removeProperty('--visual-x');visual?.style.removeProperty('--visual-y');};
+  const paint=()=>{frame=0;if(!active||document.hidden)return;if(halo){halo.hidden=overControl;halo.style.transform=`translate3d(${x-12}px,${y-12}px,0) scale(${halo.dataset.interactive==='true'?1.65:1})`;}if(visual&&bounds){visual.style.setProperty('--visual-x',`${vx}px`);visual.style.setProperty('--visual-y',`${vy}px`);}};
+  document.addEventListener('pointermove',e=>{if(e.pointerType==='touch'||document.hidden)return;active=true;x=e.clientX;y=e.clientY;const target=e.target as Element;overControl=Boolean(target.closest('input,textarea,select'));if(!halo){halo=document.createElement('div');halo.className='cursor-accent';halo.setAttribute('aria-hidden','true');document.body.append(halo);}halo.dataset.interactive=String(Boolean(target.closest('a,button,summary')));if(bounds){vx=Math.max(-6,Math.min(6,((x-bounds.left)/bounds.width-.5)*12));vy=Math.max(-5,Math.min(5,((y-bounds.top)/bounds.height-.5)*10));}if(!frame)frame=requestAnimationFrame(paint);},{signal,passive:true});
+  visual?.addEventListener('pointerenter',()=>{bounds=visual.getBoundingClientRect();},{signal,passive:true});
+  visual?.addEventListener('pointerleave',()=>{bounds=undefined;visual.style.removeProperty('--visual-x');visual.style.removeProperty('--visual-y');},{signal,passive:true});
+  window.addEventListener('resize',()=>{bounds=undefined;},{signal,passive:true});
+  document.documentElement.addEventListener('pointerleave',reset,{signal});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)reset();},{signal});
+  stopPointer=()=>{controller.abort();reset();halo?.remove();};
+ };
+ const preferences=()=>{stopPointer();observer?.disconnect();document.querySelectorAll('.studio-reveal').forEach(el=>el.classList.remove('studio-reveal'));if(!reduce.matches){reveal();pointer();}};
+ const start=()=>{reveal();pointer();};
+ if('requestIdleCallback' in window)idle=window.requestIdleCallback(start,{timeout:1200});else setTimeout(start,150);
+ reduce.addEventListener('change',preferences);fine.addEventListener('change',pointer);
+ window.addEventListener('pagehide',()=>{observer?.disconnect();stopPointer();if(idle!==undefined)window.cancelIdleCallback(idle);reduce.removeEventListener('change',preferences);fine.removeEventListener('change',pointer);},{once:true});
+</script>

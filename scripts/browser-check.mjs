@@ -7,7 +7,7 @@ try {
  for(const lang of ['hy','en','ru']) for(const width of [390,1440]) {
   const page=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
-  const response=await page.goto(`http://127.0.0.1:4321/${lang}/`);assert.equal(response.status(),200);
+  const response=await page.goto(`${process.env.PREVIEW_URL||'http://127.0.0.1:4321'}/${lang}/`);assert.equal(response.status(),200);
   await page.evaluate(()=>document.fonts.ready);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${lang} ${width} overflow`);
   assert.deepEqual(errors,[]);
@@ -27,6 +27,6 @@ try {
   await page.close();
  }
  const page=await browser.newPage({viewport:{width:320,height:800}});
- for(const lang of ['hy','en','ru']){await page.goto(`http://127.0.0.1:4321/${lang}/`);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${lang} 320px overflow`);}
+ for(const lang of ['hy','en','ru']){await page.goto(`${process.env.PREVIEW_URL||'http://127.0.0.1:4321'}/${lang}/`);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${lang} 320px overflow`);}
  console.log('PASS all locales at 320px');
 } finally {await browser.close();}
