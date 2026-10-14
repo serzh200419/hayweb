@@ -1,0 +1,4 @@
+# Cloudflare Pages local runtime secrets, loaded by Wrangler from the repo root.
+# Copy to .dev.vars and enter genuine values privately. Never commit .dev.vars.
+TELEGRAM_BOT_TOKEN=""
+TELEGRAM_CHAT_ID=""

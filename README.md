@@ -16,7 +16,7 @@ npm run verify:hosting
 npm run preview
 ```
 
-The preview serves `dist/` at http://localhost:4321. `verify` checks the generated production HTML, so run it after building. In restricted environments, set `ASTRO_TELEMETRY_DISABLED=1` to prevent Astro writing telemetry preferences outside the project.
+`npm run dev` builds the static site and starts Cloudflare Pages locally at http://127.0.0.1:8788, with the real Function and locally emulated PROJECT_REQUESTS_KV. It loads private `.dev.vars` runtime secrets. Restart it after editing credentials; rebuild/restart after page/content edits. `npm run dev:astro` is the optional Astro-only layout server and cannot deliver submissions. `npm run preview` serves `dist/` at http://localhost:4321 and also does not run Functions. `verify` checks the generated production HTML, so run it after building. In restricted environments, set `ASTRO_TELEMETRY_DISABLED=1` to prevent Astro writing telemetry preferences outside the project.
 
 ## Configuration and eventual hosting
 
@@ -73,11 +73,11 @@ Draft and future-dated entries are excluded from routes, listings, related links
 
 ## Estimates and project requests
 
-The Services calculator and Contact form use `src/lib/pricing.ts` for the same one-time regular/form-offer amounts. Languages are optional and zero-cost with a submitted request. Additional pages are beyond the agreed base scope; monthly maintenance is fixed and separate. Only option flags and quantity travel in the calculator-to-form URL, never personal details.
+The Services calculator and Contact form use `src/lib/pricing.ts` for the same one-time regular/form-offer amounts. Languages are optional and zero-cost with a submitted request. The base website includes exactly four pages: Landing/Home, Services, About and Contact. Additional pages are beyond those four; monthly maintenance is fixed and separate. Only option flags and quantity travel in the calculator-to-form URL, never personal details.
 
 Contact is now a real project request form. It requires a name, description, project selection and permission to contact the visitor, plus at least one valid email or phone. The preferred contact method must match supplied details. The same rules run in the client and the Pages Function. Submission is a quote request, not a purchase; no payment is requested. Entered details remain in the form after errors. Successful delivery displays the owner's requested one-hour response commitment and a request reference. Direct WhatsApp, phone, Telegram and email remain secondary contacts and work without JavaScript.
 
-The static site remains Astro static output. A single root-level Pages Function handles `/api/project-request`; only that path invokes Functions through `_routes.json`. Setup details and limitations are in [docs/project-request-setup.md](docs/project-request-setup.md). The delivery provider is Telegram, not email; the owner's email remains a direct-contact address. No real delivery has been verified or configured by this task.
+The static site remains Astro static output. A single root-level Pages Function handles `/api/project-request`; only that path invokes Functions through `_routes.json`. Setup details and limitations are in [docs/project-request-setup.md](docs/project-request-setup.md). The delivery provider is Telegram, not email; the owner's email remains a direct-contact address. A labeled real local TEST has now been accepted by Telegram; production configuration and live deployment remain separate owner actions.
 
 ## Extended QA
 
@@ -160,11 +160,11 @@ Actual production metadata and Search Console still require the real public orig
 
 | Item | Regular starting amount (AMD) | Starting amount with submitted project request (AMD) |
 | --- | ---: | ---: |
-| Business website | 80,000 | 40,000 |
+| Four-page business website: Landing/Home, Services, About, Contact | 80,000 | 40,000 |
 | Three-language structure | 20,000 | 0 |
 | Blog setup | 20,000 | 10,000 |
 | Product/catalog setup | 30,000 | 15,000 |
-| Each additional page beyond the agreed base | 10,000 | 5,000 |
+| Each additional page beyond the four included pages | 10,000 | 5,000 |
 | Logo design | 30,000 | 15,000 |
 
 Maintenance is fixed at 15,000 AMD/month and excluded from the discount. Third-party charges are separate. Free language setup covers Armenian, English and Russian structure; translation/content responsibilities are agreed in the quote. Product count, payment integration, shipping and advanced store features are scoped separately. All one-time choices with one additional page: 190,000 AMD regular, 85,000 AMD through the form, with maintenance separate.
@@ -181,3 +181,16 @@ The shared studio layer in `src/styles/studio.css` introduces mint/editorial ben
 `StudioEffects.astro` adds short one-time transform/opacity reveals, a fine-pointer halo and restrained hero response. Content starts visible; the main headline/CTA never wait for animation. Reduced motion removes effects, touch has no cursor overlay, the native cursor remains present, and form controls suppress the decorative halo. Pointer updates use event-driven requestAnimationFrame, with no continuous loop or layout reads in pointermove. No animation dependency or external runtime request was added.
 
 Read [docs/studio-redesign-review.md](docs/studio-redesign-review.md) for the actual three-run mobile Lighthouse before/after medians, asset inventories, contrast corrections and limitations. With preview running, `npm run test:studio` captures all three locales at desktop/mobile sizes and checks actual motion, reduced-motion cleanup, touch behavior and all canonical pages without JavaScript. Set `PREVIEW_URL` to the preview server's actual origin; `node scripts/studio-assets.mjs after` captures encoded resource sizes, and `node scripts/studio-report.mjs` regenerates the review from the local raw reports. Screenshots and diagnostics remain ignored artifacts. No push or deployment was performed.
+
+
+## Telegram runtime repair and four-page package
+
+The original real-runtime request returned 503/unconfigured because Telegram runtime credentials were absent; local KV and endpoint routing worked. The previous `dev` script ran only Astro. `npm run dev` now builds and runs both static pages and the existing Pages Function, with local KV emulation. Wrangler is pinned in devDependencies. `.dev.vars` is the ignored local secret file; `.dev.vars.example` is the committed empty template. `.env` is optional Astro/build configuration and is not the source of these Function secrets. See [docs/project-request-setup.md](docs/project-request-setup.md) for bot/chat-ID setup, encrypted production secrets and a labeled TEST procedure.
+
+Missing configuration returns HTTP 503 with exact missing names and a safe server diagnostic. Provider rejection returns 502 with a fixed diagnostic reason. A confirmation timeout returns 504; uncertain transport returns 502. Both uncertainty cases retain the short pending marker to prevent immediate duplicate notifications. No success is shown without Telegram acceptance. Credentials and full personal payloads are never logged.
+
+`src/config.ts` defines exactly four base pages. `src/package-copy.ts` supplies all three localized descriptions and extra-page wording. Blog/catalog add-ons are separate, and their included functionality must not be counted again as extra pages. Website starting prices remain 80,000 / 40,000 AMD, additional pages 10,000 / 5,000 AMD each, and maintenance 15,000 AMD/month separately. The full-option example with one additional page remains 190,000 / 85,000 AMD.
+
+`npm run test:runtime` exercises the real localhost Pages endpoint with empty configuration in all languages and refuses to run when complete credentials exist. `npm run test:requests` uses mock Telegram and KV for rejection, timeout, success, server validation, trusted prices and retry checks. `npm run test:offer` mocks browser responses, including timeout/rejection and retained details. The owner entered credentials privately; after restarting Wrangler, one labeled real TEST returned HTTP 200 with Telegram acceptance and visible success. The owner should confirm its reference in the receiving chat. Production configuration was not changed and production delivery was not tested. No push or deployment was performed.
+
+Local real TEST accepted: `HW-493F353B-FDD9-4F59-8B1F-20CF22B345DB`, `2026-10-14T19:26:44.495Z`. Private credentials are excluded from Git.

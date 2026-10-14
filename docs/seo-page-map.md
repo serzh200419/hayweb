@@ -102,7 +102,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): business website design
 - Related phrases (editorial): small business website development; business website requirements
 - Title: Business website design and development | HayWeb
-- Meta description: Business website design from 40,000 AMD through a project request. Free three-language structure; scope and content are agreed in the quote.
+- Meta description: Business website design from 40,000 AMD through a project request. Free three-language structure; scope and content are agreed in the quote. The base website includes exactly 4 pages: Landing/Home, Services, About, Contact.
 - H1: Business websites that make your offer clear.
 - Relevant internal links: [Discuss your website project ↗](/en/contact/#project-request); [English](/en/services/business-websites/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/); [One business, clear information in each language. ↗](/en/services/multilingual-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
 
@@ -192,7 +192,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): բիզնես կայքերի ստեղծում
 - Related phrases (editorial): կայք փոքր բիզնեսի համար; բիզնես կայքի պահանջներ
 - Title: Բիզնես կայքերի ստեղծում և մշակում | HayWeb
-- Meta description: Բիզնես կայքեր՝ հայտով 40 000 դրամից և երեք լեզվի անվճար կառուցվածք։ Ծավալն ու նյութերի պատրաստումը համաձայնեցվում են գնառաջարկում։
+- Meta description: Բիզնես կայքեր՝ հայտով 40 000 դրամից և երեք լեզվի անվճար կառուցվածք։ Ծավալն ու նյութերի պատրաստումը համաձայնեցվում են գնառաջարկում։ Հիմնական կայքը ներառում է ճիշտ 4 էջ՝ Գլխավոր/մեկնարկային, Ծառայություններ, Մեր մասին, Կապ։
 - H1: Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։
 - Relevant internal links: [Քննարկել ձեր կայքի նախագիծը ↗](/hy/contact/#project-request); [Հայերեն](/hy/services/business-websites/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։ ↗](/hy/services/multilingual-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
 
@@ -282,7 +282,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): разработка сайта для бизнеса
 - Related phrases (editorial): сайт для малого бизнеса; требования к сайту
 - Title: Создание и разработка сайтов для бизнеса | HayWeb
-- Meta description: Сайт для бизнеса от 40 000 драм по заявке. Структура на трёх языках бесплатно; объём и материалы согласуются в смете.
+- Meta description: Сайт для бизнеса от 40 000 драм по заявке. Структура на трёх языках бесплатно; объём и материалы согласуются в смете. Базовый сайт включает ровно 4 страницы: Главная/лендинг, Услуги, О нас, Контакты.
 - H1: Сайты для бизнеса с понятным предложением.
 - Relevant internal links: [Обсудить проект сайта ↗](/ru/contact/#project-request); [Русский](/ru/services/business-websites/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Один бизнес — понятная информация на разных языках. ↗](/ru/services/multilingual-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
 

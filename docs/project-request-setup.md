@@ -1,49 +1,79 @@
-# Project request delivery — owner setup
+# Telegram project requests: local and production setup
 
-The site stays static Astro. `/functions/api/project-request.ts` provides a Cloudflare Pages POST endpoint at `/api/project-request`. The implementation sends an owner's notification through Telegram Bot API `sendMessage`. The public Telegram username and the owner's Gmail address alone do not provide server-side delivery. No real bot, credentials or destination have been configured by this task, and no real notification has been sent.
+The existing endpoint remains `functions/api/project-request.ts` at `/api/project-request`. It uses Telegram `sendMessage` with plain text. No duplicate endpoint or WhatsApp redirect was added.
 
-Official references reviewed: [Pages Functions](https://developers.cloudflare.com/pages/functions/get-started/), [bindings and secrets](https://developers.cloudflare.com/pages/functions/bindings/), [Telegram bot creation](https://core.telegram.org/bots/tutorial), [Telegram Bot API](https://core.telegram.org/bots/api#sendmessage), and [KV consistency](https://developers.cloudflare.com/kv/api/write-key-value-pairs/).
+## Observed cause and result
 
-## Secure owner setup, before future publication
+Before repair, a real browser submission in Wrangler returned **HTTP 503 / `{"error":"unconfigured"}`**. Routing and locally emulated KV worked; neither Telegram secret was configured and `.dev.vars` did not exist. The old `npm run dev` ran Astro only, which does not run root-level Pages Functions.
 
-1. In Telegram, open the verified **@BotFather**, create a bot with `/newbot`, and keep the returned token private. Enter the token only in Cloudflare's secret field below; never put it in this chat, a PUBLIC_ variable, source, browser code, URL shared with others or a log.
-2. Open the new bot from the owner's receiving account and send `/start`. For a group destination, use a private group, add the bot and send it a command there. Use a private destination because requests contain contact details and project descriptions.
-3. Obtain the numeric destination chat ID from the bot's `getUpdates` response after `/start`. Perform this privately on your own machine. With the bot token in a local environment variable, a local script can call `https://api.telegram.org/bot<TOKEN>/getUpdates` without printing or sharing the URL; read the `message.chat.id` value locally. Do not paste the token, API URL or whole response into chat. A group ID may be negative. If getUpdates is empty, message the bot again; a bot cannot initiate a new private conversation before the user starts it. No webhook is needed for this outgoing-only integration.
-4. In Cloudflare, create a Workers KV namespace for request deduplication/rate limiting. In the Pages project, open **Settings > Bindings > Add > KV namespace**, name the binding **`PROJECT_REQUESTS_KV`**, and select that namespace. The binding name is exact; a namespace ID is not a PUBLIC_ variable. Use a separate local/preview namespace if preview testing is required.
-5. Under the Pages project's **Settings > Variables and Secrets**, add **encrypted server-side secrets** `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` for **Production**. Use the genuine token and chat ID from steps 1–3. Leave delivery secrets unset in Preview by default, so a public preview cannot generate real project notifications. Preview submissions will truthfully report unavailable. Any configured preview should use a separate test bot/chat and every real test must be explicitly labeled TEST ONLY.
-6. Retain the build configuration below and, only when publication is authorized, use Git-based Pages deployment. Cloudflare automatically builds root-level `/functions`; dashboard Direct Upload does not support this Functions folder. Rebuild/redeploy after adding secrets or bindings. No Astro SSR conversion, paid email service or domain purchase is needed.
+After repair, the real endpoint returns **503 with `missing: ["TELEGRAM_BOT_TOKEN", "TELEGRAM_CHAT_ID"]`** in the empty-configuration test before the owner entered credentials. Safe server diagnostics name missing configuration. All three localized forms retain details, show the helpful error/direct-contact alternative and re-enable submission. This correctly refused unconfigured delivery. After the owner entered local credentials, restarting the runtime was required to load them.
 
-| Configuration | Production | Preview |
+## Owner setup
+
+1. In Telegram's official **@BotFather**, use `/newbot` and follow its instructions. Keep the resulting token private; never paste it in chat, source, PUBLIC_ variables or shared URLs.
+2. From **your receiving account**, open your new bot and send `/start`. Use a new bot for this integration; no webhook is required.
+3. Enter the genuine token as `TELEGRAM_BOT_TOKEN` privately in the repository-root **`.dev.vars`**, then run **`npm.cmd run telegram:chat-id`** on PowerShell. This owner-only helper reads the file, calls `getUpdates` privately and prints candidate chat IDs/types in your local terminal. It never prints the token, API URL or message bodies. Choose your receiving account's ID and enter it as `TELEGRAM_CHAT_ID`. If no ID appears, send `/start` again and retry. A reused bot with an existing webhook cannot use getUpdates; do not remove another integration's webhook casually.
+4. The example starts empty. Enter both values privately in the ignored local file:
+
+   ```dotenv
+   TELEGRAM_BOT_TOKEN=""
+   TELEGRAM_CHAT_ID=""
+   ```
+
+   `.dev.vars.example` is the committed empty template. Do not overwrite your real file with it after entering credentials. `.dev.vars`, environment-specific variants and `.wrangler/` state are ignored. The assistant created the file empty; the owner subsequently entered genuine values locally. Those values remain private and uncommitted.
+5. For future production, create a **Workers KV namespace** in Cloudflare's KV area. Open the Pages project **Settings > Bindings > Add > KV namespace**, name the binding exactly **`PROJECT_REQUESTS_KV`**, select your production namespace and save. Under **Settings > Variables and Secrets > Add**, enter `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`, select **Encrypt**, and save for **Production**. Rebuild/redeploy when authorized. Local files are never production configuration. Preview must leave delivery secrets unset or use a separate test bot/chat and separate preview namespace. No production namespace ID is invented in this repository.
+6. From the repository root run **`npm.cmd run dev`**, then open **http://127.0.0.1:8788/en/contact/** (or `/hy/contact/`, `/ru/contact/`). This command builds the static site and starts its real endpoint and local KV:
+
+   ```sh
+   npm run build && wrangler pages dev dist --kv PROJECT_REQUESTS_KV --ip 127.0.0.1 --port 8788 --compatibility-date 2026-10-14
+   ```
+
+Wrangler is pinned in devDependencies; run `npm ci` on a new checkout. Local emulation requires no Cloudflare login or production namespace. State persists under ignored `.wrangler/`, not remote production data. Restart after changing credentials; page/content edits need a rebuild/restart. `npm run dev:astro` is the optional fast layout server and `npm run preview` is static preview; neither runs the endpoint. The agent's filesystem sandbox required elevation for Wrangler's normal log/runtime access; the exact startup command was successfully verified outside that sandbox.
+
+Official references: [local Pages runtime](https://developers.cloudflare.com/pages/functions/local-development/), [bindings and secrets](https://developers.cloudflare.com/pages/functions/bindings/), [bot creation](https://core.telegram.org/bots/tutorial), and [Telegram API](https://core.telegram.org/bots/api).
+
+## Separate build configuration
+
+Optional `.env` is for Astro and `config/site.mjs` build configuration; `.env.example` documents those values. Telegram secrets belong in `.dev.vars`. Do not assume Astro's `.env` populates Function `context.env`. Wrangler reports `Using secrets defined in .dev.vars`; when this file exists it does not merge `.env` into runtime bindings. Neither private file is committed.
+
+| Setting | Production | Preview |
 | --- | --- | --- |
-| Branch / output | `main` / `dist` | Preview branch / `dist` |
-| Build command | `npm run build` | `npm run build` |
+| Build / output | `npm run build` / `dist` | Same |
 | `NODE_VERSION` | `24.16.0` | `24.16.0` |
-| `PUBLIC_SITE_URL` | Confirmed HTTPS production origin | Same production origin |
+| `PUBLIC_SITE_URL` | Confirmed HTTPS production origin, not assigned yet | Same production origin |
 | `HAYWEB_BUILD_TARGET` | `production` | `preview` |
 | `ASTRO_TELEMETRY_DISABLED` | `1` recommended | `1` recommended |
 | `GOOGLE_SITE_VERIFICATION` | Optional genuine Google token | Normally unset |
-| `TELEGRAM_BOT_TOKEN` | Genuine bot token, encrypted secret | Unset; or isolated test-bot secret |
-| `TELEGRAM_CHAT_ID` | Genuine private destination ID, encrypted secret | Unset; or isolated test-chat secret |
-| KV binding `PROJECT_REQUESTS_KV` | Owner-created namespace | Separate namespace if used |
+| `TELEGRAM_BOT_TOKEN` | Encrypted genuine bot token | Unset or isolated test bot |
+| `TELEGRAM_CHAT_ID` | Encrypted genuine receiving ID | Unset or isolated test chat |
+| KV binding `PROJECT_REQUESTS_KV` | Selected production namespace | Separate test namespace if used |
 
-`CF_PAGES` is supplied automatically by Cloudflare. The function does not use PUBLIC_ delivery credentials. Suggested Functions compatibility date: `2026-10-14`; the endpoint uses standard Web APIs and requires no Node compatibility flag. Observe the applicable free-plan quotas; this task does not enable a paid plan.
+`CF_PAGES` is supplied by Cloudflare. No PUBLIC_ delivery secrets, paid upgrade, purchase, push or deployment was introduced.
 
-## Local checks
+## One explicitly labeled real TEST
 
-`npm run build` and Astro preview serve the HTML but **do not execute Pages Functions**. For local endpoint execution, use `npm exec --package=wrangler -- wrangler pages dev dist --kv PROJECT_REQUESTS_KV`. Create ignored `.dev.vars` only if you intentionally want to use real private provider credentials locally. Those names are the same server-side `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`. Do not use real credentials for automated tests.
+After entering both credentials privately and restarting `npm run dev`, submit **one** form request with name **TEST ONLY — owner delivery verification** and description **TEST ONLY. Not a customer request. Verify the four-page base package and separate maintenance.** Use your receiving contact details. Select website, languages, blog, catalog, logo, **one additional page**, and maintenance. Check **190,000 → 85,000 AMD** plus **15,000 AMD/month separately**.
 
-`npm run test:requests` uses an in-memory KV mock and injected mock delivery. `npm run test:offer` uses mocked API responses in the browser; no request reaches Telegram. `npm exec --package=wrangler -- wrangler pages functions build functions --outdir artifacts/functions` compiles the endpoint without deploying. All generated diagnostics and screenshots stay in ignored `artifacts/`.
+Confirm HTTP 200 with `ok: true` and a reference, then confirm the matching message actually appears in your receiving chat. It must contain reference/time, name/business, email/phone, language/contact preference, the four included pages, all services and extra-page quantity, one-time/monthly estimates and the TEST description. A fresh form visit generates a fresh request ID; do not create multiple new requests casually to test retries.
 
-After secure configuration and an authorized future deployment, send one **explicitly labeled TEST ONLY** owner request. Confirm the actual private Telegram notification contains the supplied contacts, selected services/quantity, 190,000 → 85,000 AMD full-option example, separate 15,000 AMD/month maintenance, preferred language/contact, description, reference and timestamp. Then check the visible confirmation. This live verification has not been performed here.
+Success appears only after Telegram accepts the notification: “Thank you! Your project request has been submitted. We’ll contact you within 1 hour using your preferred contact method.” API acceptance does not prove a person read it. **Local real TEST verified:** after a restart, the real form returned HTTP 200 / `ok: true`, proving Telegram accepted the labeled notification. Reference: `HW-493F353B-FDD9-4F59-8B1F-20CF22B345DB`; submitted `2026-10-14T19:26:44.495Z`. The success UI appeared with 190,000/85,000 AMD and separate 15,000 AMD/month. Exactly one real notification was accepted; the initial attempt before restart returned unconfigured and did not notify Telegram. The owner still needs to confirm seeing that reference in their receiving chat. Production configuration was not changed and production delivery was not tested; nothing was deployed.
 
-## Validation, privacy and retry behavior
+## Errors and privacy
 
-The client and server validate required name/description/acknowledgement, a valid email or phone, matching preferred contact, HTTP(S) profile URL, boolean service options and integer additional-page quantity 0–100. Name/business/email/phone/URL/description length limits are 100/120/254/40/400/2,000 characters. The request body is capped at 16 KB. The server ignores client totals and recalculates from `src/config.ts` through `src/lib/pricing.ts`.
+| Response | Meaning / owner action |
+| --- | --- |
+| 503 `unconfigured` with `missing` | Supply listed secrets or the actual KV binding; names only, never values |
+| 503 `storage` | KV unavailable; inspect binding and retry later |
+| 502 `delivery` / `bot_token_rejected` | Check bot token privately |
+| 502 `delivery` / `chat_not_found` | Check receiving ID and send `/start` |
+| 502 `delivery` / `bot_chat_forbidden` | Bot blocked or missing destination permissions |
+| 502 `delivery` / `telegram_rate_limited` | Wait before retrying |
+| 504 `timeout` / 502 `delivery_uncertain` | Acceptance unconfirmed; message may have arrived. Check chat and wait at least a minute before retrying |
+| 409 `pending` | Same request pending; wait without editing details |
+| 422 / 429 | Invalid fields / application rate limit |
 
-Spam checks include same-origin JSON POSTs, a hidden honeypot, a best-effort five-attempts-per-minute limit keyed by a salted IP hash, and a brief in-progress request marker. The browser prevents repeat submissions while loading and retains the same request ID after an unchanged retry. KV retains a sent-request fingerprint and confirmation for 24 hours; it does not retain full contact details or description. No localStorage, analytics capture or marketing subscription is added. Notifications use plain text without Telegram parse_mode, so submitted text cannot become executable markup. Credentials/provider URLs and personal data are not logged.
+The Telegram timeout is 12 seconds. Confirmed rejection clears the pending marker; timeout/uncertain transport retains it for 60 seconds to prevent immediate duplicates. Confirmed acceptance stores a fingerprint/result for 24 hours, without full personal data. KV is eventually consistent: this is best-effort deduplication, not exactly-once delivery. A late accepted message may still duplicate after expiry. Plain text has no parse_mode. Logs contain only fixed diagnostic categories, HTTP status and missing configuration names, never tokens, provider URLs or full payloads.
 
-KV is eventually consistent and has per-key write limits: deduplication/rate limiting is practical best-effort protection, **not exactly-once delivery or an atomic global lock**. Separate pending/sent keys avoid immediate double writes to the same request key. A provider timeout can leave delivery uncertain and a later retry could duplicate a notification; stronger transactional behavior would need a separately scoped design. Names and single-line fields normalize embedded line breaks; descriptions retain their lines. The complete bounded notification fits Telegram's text limit.
+`npm run test:requests` uses mock Telegram/KV for configuration, rejection, abort-signal timeout, success, trusted prices and retry checks. `npm run test:offer` mocks browser responses including timeout/rejection. With `npm run dev` running and credentials empty, `npm run test:runtime` tests the real Function in all languages and refuses to submit if both credentials are present. Automated checks do not send Telegram notifications.
 
-Only a successful Telegram HTTP response with `ok: true` permits a success response. Missing secrets/binding return 503; provider rejection/timeout returns 502; invalid fields return 422; throttling returns 429. Browser errors preserve details and never display a purchase/payment completion. After confirmed delivery, the localized confirmation promises contact within **1 hour**, as explicitly requested by the owner, without invented business-hour restrictions. The owner must be able to meet that response commitment.
-
-**Current status:** integration implemented and tested with mocks; real submission delivery awaits the owner's secure configuration and future live verification. Nothing was deployed.
+The base website includes **exactly four pages: Landing/Home, Services, About, Contact**. Prices remain 80,000/40,000 AMD; additional pages beyond those four are 10,000/5,000 AMD each. Blog/catalog add-ons are separate and their included functionality is not counted again as extra pages. Free language structure and all other prices remain unchanged; maintenance is 15,000 AMD/month separately, undiscounted.

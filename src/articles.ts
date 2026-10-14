@@ -1,7 +1,8 @@
+import {packageCopy} from './package-copy';
 import {locales,type Locale} from './config';
 import {articleRoute} from './routes';
 export interface Article {id:string;lang:Locale;slug:string;title:string;description:string;published:string;updated?:string;draft:boolean;sections:{heading:string;paragraphs:string[]}[];related:string[]}
-const article=(id:string,lang:Locale,slug:string,title:string,description:string,sections:Article['sections']):Article=>({id,lang,slug,title,description,published:'2026-10-14',...(id==='website-cost'?{updated:'2026-10-14'}:{}),draft:false,sections,related:[id==='social-website'?'website-cost':'social-website']});
+const article=(id:string,lang:Locale,slug:string,title:string,description:string,sections:Article['sections']):Article=>({id,lang,slug,title,description,published:'2026-10-14',...(id==='website-cost'?{updated:'2026-10-14'}:{}),draft:false,sections:id==='website-cost'?sections.map((s,i)=>i===3?{...s,paragraphs:[packageCopy[lang].description+' '+packageCopy[lang].extraPages,...s.paragraphs]}:s):sections,related:[id==='social-website'?'website-cost':'social-website']});
 const section=(heading:string,...paragraphs:string[])=>({heading,paragraphs});
 export const articles:Article[]=[
  article('social-website','en','website-and-instagram','Does your business need a website if it already has Instagram?','Not always. A website is useful when customers need service details, booking information or a reliable contact point beyond your Instagram posts.',[

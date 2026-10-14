@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run build && wrangler pages dev dist --kv PROJECT_REQUESTS_KV --ip 127.0.0.1 --port 8788 --compatibility-date 2026-10-14",
     "check": "astro check",
     "build": "astro build",
     "preview": "astro preview",
@@ -13,7 +13,10 @@
     "verify:hosting": "node scripts/verify-hosting.mjs",
     "test:requests": "node --test tests/project-request.test.mjs",
     "test:offer": "node scripts/offer-browser-check.mjs",
-    "test:studio": "node scripts/studio-browser-check.mjs"
+    "test:studio": "node scripts/studio-browser-check.mjs",
+    "dev:astro": "astro dev",
+    "telegram:chat-id": "node scripts/telegram-chat-id.mjs",
+    "test:runtime": "node scripts/request-runtime-check.mjs"
   },
   "repository": {
     "type": "git",
@@ -38,6 +41,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.64.1"
+    "@playwright/test": "^1.64.1",
+    "wrangler": "4.151.0"
   }
 }
