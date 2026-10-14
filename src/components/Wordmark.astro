@@ -1,0 +1,6 @@
+---
+import type {Locale} from "../config";
+interface Props {lang?:Locale}
+const {lang}=Astro.props;
+---
+<a class="wordmark" href={lang ? `/${lang}/` : "/"} aria-label="HayWeb"><svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M3 5v18M25 5v18M3 14h22M9 5l10 18" stroke="currentColor" stroke-width="3"/></svg><span>Hay<span class="wordmark-accent">Web</span></span></a>

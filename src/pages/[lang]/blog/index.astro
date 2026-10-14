@@ -1,0 +1,5 @@
+---
+import Page from '../../../layouts/Page.astro';import ArticleCard from '../../../components/ArticleCard.astro';import {locales,type Locale} from '../../../config';import {publishedArticles} from '../../../articles';
+export function getStaticPaths(){return locales.map(lang=>({params:{lang}}));}const lang=Astro.params.lang as Locale;
+---
+<Page lang={lang} page="blog"><section class="container section article-list">{publishedArticles.filter(a=>a.lang===lang).map(article=><ArticleCard article={article}/>)}</section></Page>

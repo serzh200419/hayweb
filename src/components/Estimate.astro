@@ -1,0 +1,11 @@
+---
+import {business,whatsapp,type Locale} from '../config';
+import {translations} from '../i18n';
+import {pageCopy} from '../page-copy';
+interface Props{lang:Locale}const {lang}=Astro.props;const t=translations[lang];const p=pageCopy[lang];
+---
+<section class="estimate panel" aria-labelledby="estimate-title" data-estimate data-lang={lang} data-copy={JSON.stringify({message:t.message,labels:t.priceLabels,currency:t.currency,total:p.estimateTotal,note:p.estimateNote})}><h2 id="estimate-title">{p.estimate}</h2><p id="estimate-note">{p.estimateNote}</p><form><fieldset disabled data-enhance><legend>{p.options}</legend><p>{p.base}</p><label class="check"><input type="checkbox" name="languages"/>{t.priceLabels[1]}</label><label class="check"><input type="checkbox" name="blog"/>{t.priceLabels[2]}</label><label class="check"><input type="checkbox" name="promotion"/>{p.apply}</label></fieldset><p>{p.estimateTotal}</p><output aria-live="polite" aria-describedby="estimate-note">{business.pricing.website.toLocaleString(lang)} {t.currency}</output><a class="button primary" data-estimate-link href={whatsapp(t.message)}>{t.quote} ↗</a></form><noscript><p>{p.nojs}</p></noscript></section>
+<script>
+import {business,whatsapp,type Locale} from '../config';import {estimate} from '../lib/estimate';
+document.querySelectorAll<HTMLElement>('[data-estimate]').forEach(el=>{const lang=el.dataset.lang as Locale;const copy=JSON.parse(el.dataset.copy!);const form=el.querySelector('form')!;const fieldset=el.querySelector('fieldset')!;fieldset.disabled=false;const update=()=>{const selected=new FormData(form);const value=estimate(selected.has('languages'),selected.has('blog'),selected.has('promotion'));const money=`${value.toLocaleString(lang)} ${copy.currency}`;el.querySelector('output')!.textContent=money;const lines=[copy.message,copy.labels[0],...(selected.has('languages')?[copy.labels[1]]:[]),...(selected.has('blog')?[copy.labels[2]]:[]),...(selected.has('promotion')?[business.promotion.code]:[]),`${copy.total}: ${money}`,copy.note];el.querySelector<HTMLAnchorElement>('[data-estimate-link]')!.href=whatsapp(lines.join('\n'));};form.addEventListener('change',update);form.addEventListener('submit',e=>e.preventDefault());update();});
+</script>

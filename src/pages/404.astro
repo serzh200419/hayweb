@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import {locales,languageNames} from '../config';
+const content={
+ hy:{title:'Էջը չի գտնվել',description:'Հնարավոր է՝ հասցեն սխալ է կամ էջը տեղափոխվել է։ Վերադարձեք HayWeb-ի գլխավոր էջ։',link:'Գլխավոր էջ'},
+ en:{title:'Page not found',description:'The address may be incorrect or the page may have moved. Return to the HayWeb homepage.',link:'Homepage'},
+ ru:{title:'Страница не найдена',description:'Возможно, адрес указан неверно или страница перемещена. Вернитесь на главную страницу HayWeb.',link:'Главная страница'},
+};
+---
+<Base lang="hy" title="HayWeb — 404" description={content.hy.description} noindex notFound><main class="error-page container"><Wordmark/><p class="eyebrow">404 / HayWeb</p>{locales.map(lang=><section lang={lang}>{lang==='hy'?<h1>{content[lang].title}</h1>:<h2>{content[lang].title}</h2>}<p>{content[lang].description}</p><a class="button primary" href={`/${lang}/`} lang={lang}>{content[lang].link} · {languageNames[lang]} ↗</a></section>)}</main></Base>

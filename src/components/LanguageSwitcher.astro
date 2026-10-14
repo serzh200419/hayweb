@@ -1,0 +1,7 @@
+---
+import { locales, languageNames, type Locale } from '../config';
+import { translations } from '../i18n';
+interface Props { lang: Locale; alternates?: Record<Locale,string> }
+const {lang,alternates} = Astro.props;
+---
+<nav class="languages" aria-label={translations[lang].language}>{locales.map(l => <a href={alternates?.[l] || `/${l}/`} lang={l} hreflang={l} aria-current={l === lang ? 'page' : undefined}>{languageNames[l]}</a>)}</nav>

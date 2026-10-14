@@ -1,0 +1,40 @@
+{
+  "name": "hayweb",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview",
+    "verify": "node scripts/verify.mjs && node scripts/verify-pages.mjs",
+    "test:browser": "node scripts/browser-check.mjs && node scripts/browser-pages.mjs",
+    "build:production": "node scripts/build-production.mjs",
+    "verify:hosting": "node scripts/verify-hosting.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serzh200419/hayweb.git"
+  },
+  "keywords": [],
+  "license": "UNLICENSED",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/serzh200419/hayweb/issues"
+  },
+  "homepage": "https://github.com/serzh200419/hayweb#readme",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@fontsource-variable/noto-sans": "^5.3.0",
+    "@fontsource-variable/noto-sans-armenian": "^5.3.0",
+    "astro": "^7.3.8",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1"
+  }
+}

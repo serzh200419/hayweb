@@ -1,0 +1,8 @@
+---
+import {business,whatsapp,type Locale} from '../config';
+import {translations} from '../i18n';
+interface Props{lang:Locale}
+const t=translations[Astro.props.lang];
+const links=[whatsapp(t.message),`tel:${business.telephone}`,business.telegram,`mailto:${business.email}`];
+---
+<div class="contact-links">{links.map((href,i)=><a href={href}><span>{t.contactLabels[i]}</span><strong>{i===1?business.phone:i===3?business.email:t.contactLabels[i]}</strong><span aria-hidden="true">↗</span></a>)}</div>

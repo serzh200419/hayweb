@@ -1,0 +1,3 @@
+import {business,discounted,total,type Locale} from '../config';
+import {translations} from '../i18n';
+export function articleText(text:string,lang:Locale){const money=(n:number)=>`${n.toLocaleString(lang)} ${translations[lang].currency}`;const values:Record<string,string>={website:money(business.pricing.website),languages:money(business.pricing.languages),blog:money(business.pricing.blog),total:money(total),websiteDiscount:money(discounted(business.pricing.website)),languagesDiscount:money(discounted(business.pricing.languages)),blogDiscount:money(discounted(business.pricing.blog)),totalDiscount:money(discounted(total)),code:business.promotion.code,percent:String(business.promotion.discount*100)};return text.replace(/\{(\w+)\}/g,(_,key)=>values[key]||'');}

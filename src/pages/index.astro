@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import {translations} from '../i18n';
+import {pageCopy} from '../page-copy';
+const t = translations.hy;
+---
+<Base lang="hy" entry><main class="entry-screen"><div class="container entry-brand"><Wordmark/></div><section class="container entry-card"><p class="eyebrow">{t.eyebrow}</p><h1>{pageCopy.hy.titles.services}</h1><p class="lead">{t.intro}</p><a class="button primary" href="/hy/">{t.enter} ↗</a><div class="entry-choice"><p>{t.root}</p><LanguageSwitcher lang="hy"/></div></section><p class="container entry-note">{t.note}</p></main></Base>
