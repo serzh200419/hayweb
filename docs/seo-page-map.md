@@ -8,7 +8,7 @@ Public search results were inspected for Armenian, English and Russian wording. 
 
 ## Architecture decision
 
-The homepage introduces the complete business offer. Services helps readers compare scope and prices. The dedicated business-website page covers material preparation, page choices, deliverables and updates. The multilingual page covers equivalent customer journeys, translation responsibilities and maintaining language versions. These two topics are substantial and relevant to the worldwide audience, particularly Armenian owners in Armenia and abroad. They use stable IDs and /[lang]/services/[topic]/ URLs, without city/country or industry doorway pages. Redesign remains in the overview: a useful dedicated treatment needs more agreed migration/audit/support scope than the current offer specifies. No new articles were added.
+The homepage introduces the complete business offer. Services helps readers compare scope and prices. The dedicated business-website page covers material preparation, page choices, deliverables and updates. The multilingual page covers equivalent customer journeys, translation responsibilities and maintaining language versions. These two topics are substantial and relevant to the worldwide audience, particularly Armenian owners in Armenia and abroad. They use stable IDs and /[lang]/services/[topic]/ URLs, without city/country or industry doorway pages. Redesign remains in the overview: a useful dedicated treatment needs more agreed migration/audit/support scope than the current offer specifies. No new articles were added; the cost guides describe the current form offer.
 
 ## Root and indexing policy
 
@@ -24,7 +24,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: HayWeb — Ընտրեք լեզուն
 - Meta description: Ստեղծում ենք պրոֆեսիոնալ բիզնես կայքեր, որոնք հստակ ներկայացնում են ձեր ծառայությունները, հարմար են ցանկացած էկրանի համար և հեշտացնում են կապը ձեզ հետ։
 - H1: HayWeb՝ կայքեր ձեր բիզնեսի համար։
-- Relevant internal links: [Ծանոթանալ HayWeb-ին ↗](/hy/); [English](/en/); [Русский](/ru/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Ծանոթանալ HayWeb-ին ↗](/hy/); [English](/en/); [Русский](/ru/)
 
 ### /en/ — en
 
@@ -32,9 +32,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): website creation services
 - Related phrases (editorial): business website development; professional websites
 - Title: HayWeb — Professional websites for your business
-- Meta description: Business websites, redesigns and multilingual websites. Practical design, clear communication and mobile-friendly experiences. Starting from 80,000 AMD.
+- Meta description: Business website design from 40,000 AMD through the project request form, with free three-language setup. Clear services, mobile usability and direct communication.
 - H1: A website your customers can trust.
-- Relevant internal links: [English](/en/); [Explore services ↓](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Business websites that make your offer clear.](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/)
+- Relevant internal links: [Form offer: Starting from 40,000 AMD ↗](/en/contact/#project-request); [English](/en/); [Explore services ↓](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Business websites that make your offer clear.](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/)
 
 ### /en/about/ — en
 
@@ -44,7 +44,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: About HayWeb — Our approach to business websites
 - Meta description: How HayWeb works with businesses remotely: thoughtful structure, mobile usability and direct communication.
 - H1: A clear approach to a better website.
-- Relevant internal links: [English](/en/about/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [English](/en/about/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/)
 
 ### /en/blog/ — en
 
@@ -54,7 +54,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Business website guides and practical advice | HayWeb
 - Meta description: Practical guides to business websites, social media and the decisions behind a website quote.
 - H1: Useful answers for your business online.
-- Relevant internal links: [English](/en/blog/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Home](/en/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [English](/en/blog/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Home](/en/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
 
 ### /en/blog/business-website-cost/ — en
 
@@ -62,9 +62,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): how much does a business website cost
 - Related phrases (editorial): website price factors; website development costs
 - Title: How much does a business website cost, and what affects the price? | HayWeb
-- Meta description: HayWeb business websites start from 80,000 AMD. The final quote depends on pages, functionality, languages and content; domain, hosting and support are separate.
+- Meta description: HayWeb websites: regularly from 80,000 AMD, or 40,000 AMD through the form with free three-language structure. Scope and external costs are agreed separately.
 - H1: How much does a business website cost, and what affects the price?
-- Relevant internal links: [English](/en/blog/business-website-cost/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project](/en/contact/); [← All articles](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [English](/en/blog/business-website-cost/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project](/en/contact/); [← All articles](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/)
 
 ### /en/blog/website-and-instagram/ — en
 
@@ -74,7 +74,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Does your business need a website if it already has Instagram? | HayWeb
 - Meta description: Not always. A website is useful when customers need service details, booking information or a reliable contact point beyond your Instagram posts.
 - H1: Does your business need a website if it already has Instagram?
-- Relevant internal links: [English](/en/blog/website-and-instagram/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project](/en/contact/); [← All articles](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [English](/en/blog/website-and-instagram/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project](/en/contact/); [← All articles](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
 
 ### /en/contact/ — en
 
@@ -84,7 +84,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Request a business website quote | HayWeb
 - Meta description: Discuss your website with HayWeb through WhatsApp, phone, Telegram or email. Prepare a project enquiry at your own pace.
 - H1: Tell us about your next step.
-- Relevant internal links: [English](/en/contact/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Journal](/en/blog/); [Home](/en/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [English](/en/contact/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Journal](/en/blog/); [Home](/en/)
 
 ### /en/services/ — en
 
@@ -94,7 +94,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Website design services and pricing | HayWeb
 - Meta description: Website creation, content foundations and practical integrations. Explore the scope and estimate your starting price.
 - H1: Websites built around your business.
-- Relevant internal links: [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/); [Business websites that make your offer clear.](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/)
+- Relevant internal links: [Request a quote ↗](/en/contact/#project-request); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/); [Business websites that make your offer clear.](/en/services/business-websites/); [One business, clear information in each language.](/en/services/multilingual-websites/)
 
 ### /en/services/business-websites/ — en
 
@@ -102,9 +102,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): business website design
 - Related phrases (editorial): small business website development; business website requirements
 - Title: Business website design and development | HayWeb
-- Meta description: Business websites for clear services, mobile use and customer enquiries. Explore requirements, deliverables and HayWeb’s starting price of 80,000 AMD.
+- Meta description: Business website design from 40,000 AMD through a project request. Free three-language structure; scope and content are agreed in the quote.
 - H1: Business websites that make your offer clear.
-- Relevant internal links: [English](/en/services/business-websites/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project ↗](/en/contact/); [Journal](/en/blog/); [Home](/en/); [One business, clear information in each language. ↗](/en/services/multilingual-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
+- Relevant internal links: [Discuss your website project ↗](/en/contact/#project-request); [English](/en/services/business-websites/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/); [One business, clear information in each language. ↗](/en/services/multilingual-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
 
 ### /en/services/multilingual-websites/ — en
 
@@ -112,9 +112,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): multilingual website development
 - Related phrases (editorial): Armenian English Russian website; multilingual website design
 - Title: Multilingual website design: Armenian, English and Russian | HayWeb
-- Meta description: Plan a multilingual business website with equivalent pages and language navigation. Three-language setup starts at an additional 20,000 AMD; translation is scoped separately.
+- Meta description: Armenian, English and Russian website structure is free with a project request. Plan equivalent pages and updates; translation is agreed separately.
 - H1: One business, clear information in each language.
-- Relevant internal links: [English](/en/services/multilingual-websites/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Discuss your website project ↗](/en/contact/); [Journal](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
+- Relevant internal links: [Discuss your website project ↗](/en/contact/#project-request); [English](/en/services/multilingual-websites/); [Services](/en/services/); [How it works](/en/#process); [Pricing](/en/#pricing); [About](/en/about/); [FAQ](/en/#faq); [Contact](/en/contact/); [Journal](/en/blog/); [Home](/en/); [Business websites that make your offer clear. ↗](/en/services/business-websites/); [Does your business need a website if it already has Instagram?](/en/blog/website-and-instagram/); [How much does a business website cost, and what affects the price?](/en/blog/business-website-cost/)
 
 ### /hy/ — hy
 
@@ -122,9 +122,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): կայքերի ստեղծում
 - Related phrases (editorial): կայքերի պատրաստում; բիզնես կայքեր
 - Title: HayWeb — Պրոֆեսիոնալ կայքեր ձեր բիզնեսի համար
-- Meta description: Բիզնես կայքերի ստեղծում, վերափոխում և բազմալեզու կայքեր։ Հարմարավետ դիզայն, անմիջական շփում և ճիշտ ցուցադրում բոլոր էկրաններին։ Սկսած 80 000 դրամից։
+- Meta description: Բիզնես կայքեր՝ հայտով 40 000 դրամից և երեք լեզվի անվճար կարգավորում։ Հստակ ծառայություններ, բջջային հարմարավետություն և անմիջական շփում։
 - H1: Կայք, որին ձեր հաճախորդները կվստահեն։
-- Relevant internal links: [Հայերեն](/hy/); [Դիտել ծառայությունները ↓](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/)
+- Relevant internal links: [Հայտի առաջարկ: Սկսած 40 000 դրամ ↗](/hy/contact/#project-request); [Հայերեն](/hy/); [Դիտել ծառայությունները ↓](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/)
 
 ### /hy/about/ — hy
 
@@ -134,7 +134,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: HayWeb-ի մասին՝ մեր մոտեցումը բիզնես կայքերին
 - Meta description: Ինչպես է HayWeb-ը հեռավար աշխատում բիզնեսների հետ՝ մտածված կառուցվածք, հարմարավետ բջջային տարբերակ և անմիջական շփում։
 - H1: Հստակ մոտեցում՝ ավելի լավ կայքի համար։
-- Relevant internal links: [Մեր մասին](/hy/about/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Մեր մասին](/hy/about/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/)
 
 ### /hy/blog/ — hy
 
@@ -144,7 +144,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Բիզնես կայքերի գործնական ուղեցույցներ | HayWeb
 - Meta description: Գործնական ուղեցույցներ բիզնես կայքերի, սոցիալական մեդիայի և կայքի արժեքը որոշող հարցերի մասին։
 - H1: Օգտակար պատասխաններ՝ ձեր բիզնեսի առցանց ներկայության մասին։
-- Relevant internal links: [Հայերեն](/hy/blog/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Գլխավոր](/hy/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Հայերեն](/hy/blog/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Գլխավոր](/hy/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
 
 ### /hy/blog/biznes-kayqi-arjeq/ — hy
 
@@ -152,9 +152,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): բիզնես կայքի արժեք
 - Related phrases (editorial): որքան արժե կայքը; կայքի գնի գործոններ
 - Title: Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։ | HayWeb
-- Meta description: HayWeb-ի բիզնես կայքի մեկնարկային գինը՝ 80 000 դրամ։ Վերջնական արժեքը կախված է էջերից, հնարավորություններից, լեզուներից և նյութերից։ Արտաքին ծախսերը՝ առանձին։
+- Meta description: HayWeb-ի կայքը՝ սովորաբար 80 000 դրամից, իսկ հայտով՝ 40 000 դրամից և երեք լեզվի անվճար կառուցվածք։ Ծավալն ու արտաքին ծախսերը՝ ըստ գնառաջարկի։
 - H1: Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։
-- Relevant internal links: [Հայերեն](/hy/blog/biznes-kayqi-arjeq/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը](/hy/contact/); [← Բոլոր հոդվածները](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Հայերեն](/hy/blog/biznes-kayqi-arjeq/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը](/hy/contact/); [← Բոլոր հոդվածները](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/)
 
 ### /hy/blog/kayq-ev-instagram/ — hy
 
@@ -164,7 +164,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։ | HayWeb
 - Meta description: Ոչ միշտ։ Կայքն օգտակար է, երբ Instagram-ի հրապարակումներից բացի հաճախորդին պետք են ծառայությունների մանրամասներ, ամրագրման տեղեկություն կամ կապի հստակ միջոց։
 - H1: Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։
-- Relevant internal links: [Հայերեն](/hy/blog/kayq-ev-instagram/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը](/hy/contact/); [← Բոլոր հոդվածները](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Հայերեն](/hy/blog/kayq-ev-instagram/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը](/hy/contact/); [← Բոլոր հոդվածները](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
 
 ### /hy/contact/ — hy
 
@@ -174,7 +174,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Ստացեք բիզնես կայքի գնառաջարկ | HayWeb
 - Meta description: Քննարկեք ձեր կայքը HayWeb-ի հետ WhatsApp-ով, հեռախոսով, Telegram-ով կամ էլփոստով։ Պատրաստեք նախագծի հարցումը ձեզ հարմար պահին։
 - H1: Պատմեք ձեր հաջորդ քայլի մասին։
-- Relevant internal links: [Հայերեն](/hy/contact/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Հայերեն](/hy/contact/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/)
 
 ### /hy/services/ — hy
 
@@ -184,7 +184,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Կայքերի ստեղծման ծառայություններ և գներ | HayWeb
 - Meta description: Կայքերի ստեղծում, բովանդակության հիմքեր և գործնական ինտեգրումներ։ Ծանոթացեք ծավալին և հաշվարկեք մեկնարկային արժեքը։
 - H1: Կայքեր՝ ձեր բիզնեսի համար։
-- Relevant internal links: [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/)
+- Relevant internal links: [Օգտվել առաջարկից ↗](/hy/contact/#project-request); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։](/hy/services/business-websites/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։](/hy/services/multilingual-websites/)
 
 ### /hy/services/business-websites/ — hy
 
@@ -192,9 +192,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): բիզնես կայքերի ստեղծում
 - Related phrases (editorial): կայք փոքր բիզնեսի համար; բիզնես կայքի պահանջներ
 - Title: Բիզնես կայքերի ստեղծում և մշակում | HayWeb
-- Meta description: Բիզնես կայքեր՝ հստակ ծառայություններով, հարմար բջջային տարբերակով և կապի միջոցներով։ Պահանջներ ու արդյունքներ․ մեկնարկային գինը՝ 80 000 դրամ։
+- Meta description: Բիզնես կայքեր՝ հայտով 40 000 դրամից և երեք լեզվի անվճար կառուցվածք։ Ծավալն ու նյութերի պատրաստումը համաձայնեցվում են գնառաջարկում։
 - H1: Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։
-- Relevant internal links: [Հայերեն](/hy/services/business-websites/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը ↗](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։ ↗](/hy/services/multilingual-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
+- Relevant internal links: [Քննարկել ձեր կայքի նախագիծը ↗](/hy/contact/#project-request); [Հայերեն](/hy/services/business-websites/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։ ↗](/hy/services/multilingual-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
 
 ### /hy/services/multilingual-websites/ — hy
 
@@ -202,9 +202,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): բազմալեզու կայքեր
 - Related phrases (editorial): հայերեն անգլերեն ռուսերեն կայք; բազմալեզու կայքի ստեղծում
 - Title: Բազմալեզու կայքեր՝ հայերեն, անգլերեն և ռուսերեն | HayWeb
-- Meta description: Բազմալեզու բիզնես կայքեր՝ համարժեք էջերով և լեզվի ընտրությամբ։ Երեք լեզվի կարգավորումը՝ լրացուցիչ 20 000 դրամից, թարգմանությունը՝ ըստ պայմանավորվածության։
+- Meta description: Կայքի հայերեն, անգլերեն և ռուսերեն կառուցվածքն անվճար է՝ նախագծի հայտով։ Համարժեք էջեր և թարմացումներ․ թարգմանությունը՝ առանձին։
 - H1: Մեկ բիզնես՝ հասկանալի տեղեկությամբ տարբեր լեզուներով։
-- Relevant internal links: [Հայերեն](/hy/services/multilingual-websites/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Քննարկել ձեր կայքի նախագիծը ↗](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
+- Relevant internal links: [Քննարկել ձեր կայքի նախագիծը ↗](/hy/contact/#project-request); [Հայերեն](/hy/services/multilingual-websites/); [Ծառայություններ](/hy/services/); [Ընթացքը](/hy/#process); [Գներ](/hy/#pricing); [Մեր մասին](/hy/about/); [Հարցեր](/hy/#faq); [Կապ](/hy/contact/); [Բլոգ](/hy/blog/); [Գլխավոր](/hy/); [Բիզնես կայքեր՝ ձեր առաջարկը հստակ ներկայացնելու համար։ ↗](/hy/services/business-websites/); [Ձեր բիզնեսին կայք պե՞տք է, եթե արդեն Instagram ունի։](/hy/blog/kayq-ev-instagram/); [Որքա՞ն արժե բիզնես կայքը, և ինչի՞ց է կախված գինը։](/hy/blog/biznes-kayqi-arjeq/)
 
 ### /ru/ — ru
 
@@ -212,9 +212,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): создание сайтов для бизнеса
 - Related phrases (editorial): разработка сайтов; профессиональный сайт
 - Title: HayWeb — Профессиональные сайты для бизнеса
-- Meta description: Сайты для бизнеса, редизайн и многоязычные проекты. Практичный дизайн, прямое общение и удобство на любом экране. От 80 000 драмов.
+- Meta description: Сайты для бизнеса от 40 000 драм по заявке, с бесплатной настройкой трёх языков. Понятные услуги, удобство на телефоне и прямое общение.
 - H1: Сайт, которому доверяют ваши клиенты.
-- Relevant internal links: [Русский](/ru/); [Посмотреть услуги ↓](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Сайты для бизнеса с понятным предложением.](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/)
+- Relevant internal links: [Цена по заявке: От 40 000 драм ↗](/ru/contact/#project-request); [Русский](/ru/); [Посмотреть услуги ↓](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Сайты для бизнеса с понятным предложением.](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/)
 
 ### /ru/about/ — ru
 
@@ -224,7 +224,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: О HayWeb — Наш подход к сайтам для бизнеса
 - Meta description: Как HayWeb работает с бизнесом удалённо: продуманная структура, удобство на мобильных устройствах и прямое общение.
 - H1: Понятный подход к хорошему сайту.
-- Relevant internal links: [Русский](/ru/about/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Русский](/ru/about/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/)
 
 ### /ru/blog/ — ru
 
@@ -234,7 +234,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Практические руководства о сайтах для бизнеса | HayWeb
 - Meta description: Практические руководства о сайтах для бизнеса, социальных сетях и решениях, влияющих на стоимость проекта.
 - H1: Полезные ответы для бизнеса в интернете.
-- Relevant internal links: [Русский](/ru/blog/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Главная](/ru/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Русский](/ru/blog/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Главная](/ru/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
 
 ### /ru/blog/sait-i-instagram/ — ru
 
@@ -244,7 +244,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Нужен ли бизнесу сайт, если уже есть Instagram? | HayWeb
 - Meta description: Не всегда. Сайт полезен, когда помимо публикаций в Instagram клиентам нужны детали услуг, условия бронирования или понятный способ связи.
 - H1: Нужен ли бизнесу сайт, если уже есть Instagram?
-- Relevant internal links: [Русский](/ru/blog/sait-i-instagram/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта](/ru/contact/); [← Все статьи](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Русский](/ru/blog/sait-i-instagram/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта](/ru/contact/); [← Все статьи](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
 
 ### /ru/blog/stoimost-saita-dlya-biznesa/ — ru
 
@@ -252,9 +252,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): сколько стоит сайт для бизнеса
 - Related phrases (editorial): факторы цены сайта; стоимость разработки сайта
 - Title: Сколько стоит сайт для бизнеса и от чего зависит цена? | HayWeb
-- Meta description: Сайт HayWeb — от 80 000 драм. Итог зависит от страниц, функций, языков и контента. Домен, хостинг и поддержка оплачиваются отдельно.
+- Meta description: Сайт HayWeb: обычно от 80 000 драм, по форме — от 40 000 драм с бесплатной структурой на трёх языках. Объём и внешние расходы согласуются отдельно.
 - H1: Сколько стоит сайт для бизнеса и от чего зависит цена?
-- Relevant internal links: [Русский](/ru/blog/stoimost-saita-dlya-biznesa/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта](/ru/contact/); [← Все статьи](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Русский](/ru/blog/stoimost-saita-dlya-biznesa/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта](/ru/contact/); [← Все статьи](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/)
 
 ### /ru/contact/ — ru
 
@@ -264,7 +264,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Запросить стоимость сайта для бизнеса | HayWeb
 - Meta description: Обсудите сайт с HayWeb через WhatsApp, телефон, Telegram или почту. Подготовьте запрос о проекте в удобном темпе.
 - H1: Расскажите о следующем шаге.
-- Relevant internal links: [Контакты](/ru/contact/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Блог](/ru/blog/); [Главная](/ru/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Контакты](/ru/contact/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Блог](/ru/blog/); [Главная](/ru/)
 
 ### /ru/services/ — ru
 
@@ -274,7 +274,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Title: Услуги по созданию сайтов и цены | HayWeb
 - Meta description: Создание сайтов, структура контента и практичные интеграции. Узнайте о составе работ и оцените стартовую стоимость.
 - H1: Сайты под задачи вашего бизнеса.
-- Relevant internal links: [Русский](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением.](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/)
+- Relevant internal links: [Получить предложение ↗](/ru/contact/#project-request); [Русский](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением.](/ru/services/business-websites/); [Один бизнес — понятная информация на разных языках.](/ru/services/multilingual-websites/)
 
 ### /ru/services/business-websites/ — ru
 
@@ -282,9 +282,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): разработка сайта для бизнеса
 - Related phrases (editorial): сайт для малого бизнеса; требования к сайту
 - Title: Создание и разработка сайтов для бизнеса | HayWeb
-- Meta description: Сайты для понятного представления услуг, удобства на мобильных устройствах и обращений клиентов. Состав работ и стартовая цена HayWeb — от 80 000 драм.
+- Meta description: Сайт для бизнеса от 40 000 драм по заявке. Структура на трёх языках бесплатно; объём и материалы согласуются в смете.
 - H1: Сайты для бизнеса с понятным предложением.
-- Relevant internal links: [Русский](/ru/services/business-websites/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта ↗](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Один бизнес — понятная информация на разных языках. ↗](/ru/services/multilingual-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
+- Relevant internal links: [Обсудить проект сайта ↗](/ru/contact/#project-request); [Русский](/ru/services/business-websites/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Один бизнес — понятная информация на разных языках. ↗](/ru/services/multilingual-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
 
 ### /ru/services/multilingual-websites/ — ru
 
@@ -292,9 +292,9 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 - Primary phrase (editorial): разработка многоязычных сайтов
 - Related phrases (editorial): сайт на армянском английском русском; многоязычный сайт
 - Title: Многоязычные сайты: армянский, английский и русский | HayWeb
-- Meta description: Многоязычный сайт для бизнеса с соответствующими страницами и выбором языка. Настройка трёх языков — дополнительно от 20 000 драм; перевод обсуждается отдельно.
+- Meta description: Структура сайта на армянском, английском и русском бесплатно по заявке. Соответствующие страницы и обновления; перевод обсуждается отдельно.
 - H1: Один бизнес — понятная информация на разных языках.
-- Relevant internal links: [Русский](/ru/services/multilingual-websites/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Обсудить проект сайта ↗](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
+- Relevant internal links: [Обсудить проект сайта ↗](/ru/contact/#project-request); [Русский](/ru/services/multilingual-websites/); [Услуги](/ru/services/); [Как мы работаем](/ru/#process); [Цены](/ru/#pricing); [О нас](/ru/about/); [Вопросы](/ru/#faq); [Контакты](/ru/contact/); [Блог](/ru/blog/); [Главная](/ru/); [Сайты для бизнеса с понятным предложением. ↗](/ru/services/business-websites/); [Нужен ли бизнесу сайт, если уже есть Instagram?](/ru/blog/sait-i-instagram/); [Сколько стоит сайт для бизнеса и от чего зависит цена?](/ru/blog/stoimost-saita-dlya-biznesa/)
 
 ## Shared recovery page: /404.html
 
@@ -308,7 +308,7 @@ The Armenian root entry is a concise brand/language gateway, not a duplicate lan
 
 ## Review outcome and next steps
 
-Descriptive inner-page search titles now distinguish service selection, the working approach, quote requests and planning advice. Existing hero H1s remain natural rather than repeating exact-match phrases. The root H1 is distinct from the Armenian Services heading. About now has its own collaboration introduction instead of repeating the homepage paragraph. Article leads directly answer the Instagram and cost questions; pricing in the cost lead is resolved from business configuration. Publication dates remain unchanged; these introductory/editorial adjustments do not warrant artificial freshness dates. Existing article examples and related-article relationships remain useful.
+Descriptive inner-page search titles now distinguish service selection, the working approach, quote requests and planning advice. Existing hero H1s remain natural rather than repeating exact-match phrases. The root H1 is distinct from the Armenian Services heading. About now has its own collaboration introduction instead of repeating the homepage paragraph. Article leads directly answer the Instagram and cost questions; pricing in the cost lead is resolved from business configuration. Publication dates remain unchanged; the cost articles have an actual 2026-10-14 revision date for the substantive form-offer pricing update. Existing article examples and related-article relationships remain useful.
 
 New service pages link to both useful planning articles and Contact; the homepage and Services link to each service page; both articles link back to the service details and Contact. Normal static HTML links make every canonical page reachable from the root. BreadcrumbList, Organization/WebSite and existing BlogPosting data remain truthful; no extra rich-result schema was added. Prices, promotional arithmetic, official logos and interactive tools are preserved.
 

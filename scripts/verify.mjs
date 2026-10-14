@@ -25,9 +25,8 @@ for (const lang of ['hy','en','ru']) {
    if(lang==='ru') assert(/[\u0400-\u04ff]/.test(message));
   }
  }
- const promotional = [...html.matchAll(/href="(https:\/\/wa.me\/[^\"]+)"/g)].some(([,u])=>new URL(u).searchParams.get('text').includes('WEBSERVICE'));
- assert(promotional);
- for(const price of [80000,20000,64000,16000,120000,96000]) {
+ assert(html.includes(`href="/${lang}/contact/#project-request"`));
+ for(const price of [80000,40000,20000,10000,30000,15000,5000]) {
   const formatted = new Intl.NumberFormat({hy:'hy-AM',en:'en-US',ru:'ru-RU'}[lang]).format(price);
   assert(html.includes(formatted),`${lang}: ${price}`);
  }
@@ -43,7 +42,7 @@ assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,28);
 console.log('PASS root entry, reciprocal language alternatives, sitemap and robots');
 const rgb = h=>h.match(/\w\w/g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
 const luminance=h=>rgb(h).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
-for(const [fg,bg] of [['142238','ffffff'],['536174','f6f9fc'],['007f83','ffffff'],['007f83','f6f9fc'],['0b1730','2dd4bf'],['c6cfdb','0b1730'],['9fb4cd','0b1730'],['2dd4bf','0b1730']]) {
+for(const [fg,bg] of [['142238','ffffff'],['536174','f6f9fc'],['007f83','ffffff'],['007f83','f6f9fc'],['0b1730','2dd4bf'],['c6cfdb','0b1730'],['9fb4cd','0b1730'],['2dd4bf','0b1730'],['ffffff','a53d32'],['76251f','fff1ed']]) {
  const values=[luminance(fg),luminance(bg)].sort((a,b)=>b-a);const contrast=(values[0]+.05)/(values[1]+.05);
  assert(contrast>=4.5,`${fg} on ${bg}: ${contrast}`);console.log(`PASS contrast #${fg} on #${bg}: ${contrast.toFixed(2)}:1`);
 }

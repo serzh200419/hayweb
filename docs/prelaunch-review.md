@@ -1,6 +1,6 @@
 # HayWeb pre-launch review — 2026-10-14
 
-The existing website was reviewed and updated locally. No new articles, product features, hosting project, account connection, Git push or deployment were added.
+Historical diagnostic report from before the project request integration. Current offer and delivery behavior are documented in README and docs/project-request-setup.md. The earlier site was reviewed and updated locally. No new articles, product features, hosting project, account connection, Git push or deployment were added.
 
 ## Concrete issues fixed
 
@@ -13,9 +13,9 @@ The existing website was reviewed and updated locally. No new articles, product 
 
 ## Customer experience review
 
-The browser checks visited all seven published routes in each language. Representative root, Armenian homepage, English Services, Russian Contact and article screenshots were inspected. The hero's supporting copy explains professional website creation, mobile use and contact. The mobile header enquiry link is visible before the hero. Confirmed base/add-on prices, the 20% code and third-party exclusions are consistent; the service groups distinguish translation, copywriting, ongoing SEO, support and subscriptions from the agreed scope. The calculator includes the base website, and its draft link lists selected additions and the estimated starting amount. The Contact action prepares a draft rather than reporting a message sent.
+The browser checks visited all seven published routes in each language. Representative root, Armenian homepage, English Services, Russian Contact and article screenshots were inspected. The hero's supporting copy explains professional website creation, mobile use and contact. The mobile header enquiry link is visible before the hero. Confirmed base/add-on prices, the 50% code and third-party exclusions are consistent; the service groups distinguish translation, copywriting, ongoing SEO, support and subscriptions from the agreed scope. The calculator includes the base website, and its draft link lists selected additions and the estimated starting amount. The Contact action prepares a draft rather than reporting a message sent.
 
-No fabricated clients, testimonials, team/history claims, performance guarantees or portfolio were found in the reviewed content. The original hero mockup is labeled illustrative. No visible placeholder copy or implementation commentary was found. Platform names, the brand and WEBSERVICE are intentionally unchanged across translations.
+No fabricated clients, testimonials, team/history claims, performance guarantees or portfolio were found in the reviewed content. The original hero mockup is labeled illustrative. No visible placeholder copy or implementation commentary was found. Platform names, the brand and project request form are intentionally unchanged across translations.
 
 Coverage and glyph rendering were checked, but native Armenian/Russian accuracy is not certified. Human editorial review should focus on hero and CTA idiom, technical SEO/integration terminology, translation/content responsibilities, promotion exclusions and the inflected price wording in Armenian articles. Existing useful copy was retained rather than broadly rewritten.
 

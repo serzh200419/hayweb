@@ -1,6 +1,6 @@
 # HayWeb
 
-Multilingual HayWeb business website with dedicated services, about, contact and journal pages. Astro + TypeScript, entirely static. **Not deployed.**
+Multilingual HayWeb business website with dedicated services, about, contact and journal pages. Astro + TypeScript static pages with one Cloudflare Pages submission Function. **Not deployed.**
 
 ## Local development
 
@@ -26,7 +26,7 @@ Hosted builds require `HAYWEB_BUILD_TARGET=production` or `preview` and `PUBLIC_
 
 The configuration is centralized in `config/site.mjs`; the Astro integration writes preview-only indexing headers after the build. See the exact checklist below before creating a hosted project. No deployment or hosting registration has been performed.
 
-Business contacts, base pricing and promotion percentage/code live in `src/config.ts`. Prices and bundles are calculated from those values. Public URL, build target and optional Google verification configuration live in `config/site.mjs`; `astro.config.mjs` consumes them. Localized promotion wording in `src/i18n.ts` must also be reviewed if the offer changes.
+Business contacts, regular prices and the form-only promotion live in `src/config.ts`. `src/lib/pricing.ts` calculates all estimates from those values. Public URL, build target and optional Google verification configuration live in `config/site.mjs`; `astro.config.mjs` consumes them. Localized offer wording in `src/offer-copy.ts` and relevant content must also be reviewed if the offer changes.
 
 ## Architecture
 
@@ -49,11 +49,11 @@ Headless Chrome checks pass at 390px and 1440px for all locales, plus overflow c
 
 Main foreground/background pairs exceed WCAG AA's 4.5:1 normal-text threshold; turquoise on off-white is 4.55:1 and navy on aqua is 9.56:1. Visible focus, native FAQ disclosure and semantic sections work without client JavaScript.
 
-Informational pages ship no browser JavaScript. Services and Contact progressively enhance their tools with small page-specific modules and a shared pricing/contact module (about 2.3 KB combined, uncompressed). Localized tool copy is embedded per page; full translation dictionaries are not shipped to browsers. Only three locally bundled WOFF2 script subsets (Latin, Cyrillic, Armenian) are used, with variable normal weights and `font-display: swap`. Noto fonts are licensed under SIL OFL; notices are included in `public/licenses/`. Hero artwork uses CSS, with no remote image or font requests. No performance score or search indexing outcome is guaranteed.
+Informational pages ship no browser JavaScript. Services and Contact progressively enhance their tools with small page-specific modules and a shared pricing/contact module (small shared client modules). Localized tool copy is embedded per page; full translation dictionaries are not shipped to browsers. Only three locally bundled WOFF2 script subsets (Latin, Cyrillic, Armenian) are used, with variable normal weights and `font-display: swap`. Noto fonts are licensed under SIL OFL; notices are included in `public/licenses/`. Hero artwork uses CSS, with no remote image or font requests. No performance score or search indexing outcome is guaranteed.
 
 ## Known limitations and next steps
 
-- There is no submission backend. The contact composer prepares a WhatsApp draft for the visitor to review and send.
+- The project request endpoint requires server-side delivery credentials and a KV binding; until configured, it returns unavailable rather than claiming success.
 - Sharing metadata uses a real 1200 x 630 PNG rasterized from the original brand SVG.
 - Translations are complete but can benefit from final editorial review by the business before publication.
 - Domain, hosting, translation/content work, delivery timing, revisions and maintenance scope are agreed per quote. No external costs or outcomes are implicitly guaranteed.
@@ -71,29 +71,31 @@ Articles are typed build-time content in `src/articles.ts`, rather than a databa
 
 Draft and future-dated entries are excluded from routes, listings, related links and sitemap. Current published translation groups must have all three languages; missing equivalents fail the build rather than sending readers to an unrelated page. Do not change an existing slug casually; a published URL change would need a redirect plan. Prices in cost articles use placeholders resolved from `src/config.ts` by `src/lib/article-text.ts`; do not duplicate price arithmetic in article prose. HayWeb is the actual publisher/byline. Current articles were created on 2026-10-14.
 
-## Estimates and enquiries
+## Estimates and project requests
 
-The Services calculator always includes the base website, with optional three-language setup, blog setup and WEBSERVICE promotion. `src/lib/estimate.ts` uses the same configured prices and discount as the homepage. Its WhatsApp link includes selected options, promotion when applied and estimated starting total. It is not a final quote. Without JavaScript, prices and the direct enquiry link remain usable and interactive fields are disabled.
+The Services calculator and Contact form use `src/lib/pricing.ts` for the same one-time regular/form-offer amounts. Languages are optional and zero-cost with a submitted request. Additional pages are beyond the agreed base scope; monthly maintenance is fixed and separate. Only option flags and quantity travel in the calculator-to-form URL, never personal details.
 
-The Contact composer accepts optional name, business, URL and promotion code, service interest, description and preferred language. All fields have visible localized labels. Either a service choice or short description is sufficient; provided URLs must use HTTP or HTTPS. Validation marks and focuses the relevant field with an associated localized explanation. A valid submit prepares an encoded WhatsApp draft and navigates in the same tab. The visitor must send it in WhatsApp. There is no success claim, persistence, localStorage, analytics capture or backend. Direct WhatsApp, telephone, Telegram and email links remain available without JavaScript.
+Contact is now a real project request form. It requires a name, description, project selection and permission to contact the visitor, plus at least one valid email or phone. The preferred contact method must match supplied details. The same rules run in the client and the Pages Function. Submission is a quote request, not a purchase; no payment is requested. Entered details remain in the form after errors. Successful delivery displays the owner's requested one-hour response commitment and a request reference. Direct WhatsApp, phone, Telegram and email remain secondary contacts and work without JavaScript.
+
+The static site remains Astro static output. A single root-level Pages Function handles `/api/project-request`; only that path invokes Functions through `_routes.json`. Setup details and limitations are in [docs/project-request-setup.md](docs/project-request-setup.md). The delivery provider is Telegram, not email; the owner's email remains a direct-contact address. No real delivery has been verified or configured by this task.
 
 ## Extended QA
 
 After building, run `npm run verify` (includes both verification scripts). It checks all 28 canonical pages, unique page titles/descriptions, self-canonicals, reciprocal translated URLs, structured data, internal paths and anchors, article rendering, sitemap and PNG dimensions.
 
-With preview running, run `npm run test:browser` (runs both browser scripts). The latter covers all seven routes per language at 320, 390, 768 and 1440px, plus equivalent-page/article language switching, keyboard focus, all eight calculator combinations, localized WhatsApp drafts preserving punctuation and newlines, validation, keyboard form submission and no-JavaScript navigation/contact alternatives. WhatsApp requests are intercepted during testing; no enquiry is sent. Screenshots of home, services, contact and one article are captured for every language at 390 and 1440px into ignored `artifacts/`, including viewport-only variants. Inspect representative screenshots manually. This is focused browser QA, not a full screen-reader audit or a production performance measurement.
+If preview selects a different address, set `PREVIEW_URL` to that local origin for `test:offer`. With preview running, `npm run test:browser` checks navigation, keyboard controls, language switching, responsive pages and no-JavaScript contact alternatives. `npm run test:offer` checks every canonical page at 320, 390, 768 and 1440px, all-option pricing and selection transfer, accessible validation, retained details, unchanged retry IDs, failed delivery without false success and mocked confirmation in all three languages. `npm run test:requests` checks 128 pricing combinations and server validation/delivery behavior with mock Telegram and KV implementations. No real notification is sent by these checks. Screenshots stay in ignored `artifacts/`; the success image explicitly uses a MOCK reference. This is focused QA, not a full screen-reader audit or production performance measurement.
 
-Latest verification: Astro check reported 0 errors, 0 warnings and 0 hints; the production build now generates 29 pages (28 canonical pages plus the branded 404). Both static verification scripts and both browser scripts passed. All language routes passed overflow checks at 320, 390, 768 and 1440px. Eight calculator combinations and encoded enquiry drafts passed for each locale. Representative desktop/mobile screenshots of the homepage, Services, Contact and an article were manually inspected. No deployment was performed.
+Latest offer verification: Astro check reported 0 errors, 0 warnings and 0 hints; the static build generates 29 HTML pages. Static SEO/link/price checks and the offer browser suite passed. Representative desktop/mobile offer screenshots were manually inspected. Actual provider delivery and live Cloudflare behavior still await private configuration and publication.
 
 
 ## Exact Cloudflare Pages deployment checklist
 
 These are instructions for the owner to use when publication is authorized. Nothing in this task connected an account, created a project, pushed Git changes or deployed. Official Cloudflare guidance was reviewed on 2026-10-14: [Git integration](https://developers.cloudflare.com/pages/get-started/git-integration/), [build configuration](https://developers.cloudflare.com/pages/configuration/build-configuration/), [build image / Node overrides](https://developers.cloudflare.com/pages/configuration/build-image/), [preview indexing](https://developers.cloudflare.com/pages/configuration/preview-deployments/), [headers](https://developers.cloudflare.com/pages/configuration/headers/), and [static serving / 404 behavior](https://developers.cloudflare.com/pages/configuration/serving-pages/).
 
-1. Review and commit the local website changes, then push them to the existing `serzh200419/hayweb` GitHub repository. The current branch is `main`; the implementation has not been committed or pushed by this task. The remote must contain the actual source and `package-lock.json`, not just its original README. Keep `.env`, `node_modules/`, `dist/` and `artifacts/` out of Git.
+1. Review and commit the local website changes, then push them to the existing `serzh200419/hayweb` GitHub repository. The current branch is `main`; local commits exist, but these changes have not been pushed. The remote must contain the actual source and `package-lock.json`, not just its original README. Keep `.env`, `node_modules/`, `dist/` and `artifacts/` out of Git.
 2. When ready to publish, open Cloudflare **Workers & Pages > Create application > Pages > Connect to Git**. Select GitHub, authorize access to the existing repository and choose `serzh200419/hayweb`. Select Git integration rather than Direct Upload.
 3. Choose an available Pages project name and confirm the production hostname Cloudflare assigns. Do not assume `hayweb.pages.dev` is available. Use the confirmed `https://<assigned-project>.pages.dev` origin. If the initial setup cannot confirm the final name before its build, leave the public URL unset so the guard fails instead of publishing bad metadata; then configure the assigned origin in project settings and retry the build.
-4. Select production branch `main`, Astro preset (or manual settings), repository root as the root directory, **build command `npm run build`**, and **output directory `dist`**. Use the supported v3 build image. No adapter, Functions, server or Wrangler deploy command is needed.
+4. Select production branch `main`, Astro preset (or manual settings), repository root as the root directory, **build command `npm run build`**, and **output directory `dist`**. Use the supported v3 build image. No Astro server adapter is needed. The root-level Pages Function is bundled by Git-based Pages deployment; do not use dashboard Direct Upload for this integration.
 5. Configure build environment variables in the setup screen, or project **Settings > Environment variables / Variables and Secrets**, separately for **Production** and **Preview**:
 
    | Variable | Production | Preview |
@@ -107,7 +109,7 @@ These are instructions for the owner to use when publication is authorized. Noth
    `.node-version` also pins Node 24.16.0. Cloudflare supports Node overrides through this file or `NODE_VERSION`; do not rely on `package.json` engines being detected. Do not put a branch/hash preview URL into `PUBLIC_SITE_URL`.
 6. Before publishing, run the local checks using the confirmed origin: `npm run check`, `npm run build:production`, `npm run verify` and `npm run verify:hosting`. Keep `HAYWEB_BUILD_TARGET=production` in the environment for verification too. On PowerShell, use `$env:PUBLIC_SITE_URL='https://<confirmed-origin>'` and `$env:HAYWEB_BUILD_TARGET='production'`, replacing the placeholder. These commands only build locally.
 7. Only when publication is authorized, finish the dashboard's **Save and Deploy** flow or retry the correctly configured production build. After confirming or changing the public URL, trigger a **new build** of the production branch; old artifacts cannot update their canonicals by changing variables alone. Subsequent pushes to connected branches can trigger automatic deployments.
-8. Check the actual production site after that future deployment: root language choice, all three homepages, deep article URLs, pricing calculator, WhatsApp draft preparation, `/social.png`, `/robots.txt`, `/sitemap.xml`, and an unknown path. Confirm the unknown path responds with HTTP 404 and the branded page, not a 200 homepage fallback. Check that a no-slash URL such as `/en/services` resolves to `/en/services/`; files are generated as `index.html` under each route and Pages supplies static URL normalization. Deep links need no browser router or SPA fallback.
+8. Check the actual production site after that future deployment: root language choice, all three homepages, deep article URLs, pricing calculator, project request delivery (a clearly labeled owner test), secondary contact links, `/social.png`, `/robots.txt`, `/sitemap.xml`, and an unknown path. Confirm the unknown path responds with HTTP 404 and the branded page, not a 200 homepage fallback. Check that a no-slash URL such as `/en/services` resolves to `/en/services/`; files are generated as `index.html` under each route and Pages supplies static URL normalization. Deep links need no browser router or SPA fallback.
 
 ### Preview indexing and response headers
 
@@ -127,7 +129,7 @@ Submit the actual `https://<assigned-project>.pages.dev/sitemap.xml` URL through
 
 ### Owner inputs and remaining checks
 
-The owner must choose an available project name, confirm the real production origin, authorize the GitHub connection when actually deploying, and optionally supply Google's genuine verification token/file. No credentials are needed by the local implementation. Native Armenian/Russian editorial review is still recommended for the idiom of hero/CTA text, technical service terminology, promotion exclusions and article price phrasing. Rendering and translation coverage were checked; native-language accuracy is not certified. A full screen-reader audit and actual Cloudflare edge/header checks have not been performed.
+The owner must choose an available project name, confirm the real production origin, authorize the GitHub connection when actually deploying, and optionally supply Google's genuine verification token/file. Local mock checks need no credentials; real submission delivery needs the private secrets and KV binding in the setup guide. Native Armenian/Russian editorial review is still recommended for the idiom of hero/CTA text, technical service terminology, promotion exclusions and article price phrasing. Rendering and translation coverage were checked; native-language accuracy is not certified. A full screen-reader audit and actual Cloudflare edge/header checks have not been performed.
 
 See [the focused pre-launch report](docs/prelaunch-review.md) for observed issues, final checks and local Lighthouse metrics. Lighthouse was temporary QA tooling, not a new application dependency.
 
@@ -147,8 +149,26 @@ The intent, suggested search phrases, rendered titles/descriptions/H1s and relev
 
 Two service topics are now available in every language at `/[lang]/services/business-websites/` and `/[lang]/services/multilingual-websites/`. They provide distinct audience guidance, preparation requirements, deliverables, price factors and relevant FAQs, without city/industry doorway pages. `src/service-copy.ts` holds typed translations; the shared route map includes both IDs and the sitemap derives its pages from that map. Descriptive service links appear in the homepage and Services overview; articles link to service details, which link to the existing guides and Contact. Header navigation remains concise. Redesign is retained in the overview pending a more concrete migration/audit offering.
 
-`src/page-meta.ts` defines purpose-specific search titles and a distinct About introduction. Article descriptions now provide a direct opening answer, with prices resolved from the existing business configuration. Article titles, substantive body examples and publication dates were retained; no new article or artificial freshness date was added. The root has a distinct brand/language-entry H1. The reviewed official logos, price configuration, promotion and interactive tools remain intact.
+`src/page-meta.ts` defines purpose-specific search titles and a distinct About introduction. Article descriptions now provide a direct opening answer, with prices resolved from the existing business configuration. Article titles, substantive body examples and publication dates were retained; no new article or artificial freshness date was added. The root has a distinct brand/language-entry H1. The SEO review preserved the official logos and interactive structure; the subsequent form-offer update is documented below.
 
 After building, `npm run verify` checks unique H1s, reciprocal language links and x-default, all canonical sitemap URLs and reachability from the root, in addition to the existing metadata/link checks. Run `node scripts/seo-page-map.mjs` to regenerate the page records from built HTML; maintain its intent assignments when adding new pages. `node scripts/seo-browser-check.mjs` checks changed layouts and both service topics at 320, 390 and 1440px across the three languages and captures screenshots in ignored artifacts. The current site has 28 canonical pages plus the branded 404, 29 HTML pages total. Lighthouse was not repeated for these static text/link/CSS changes.
 
 Actual production metadata and Search Console still require the real public origin, a rebuild and live verification. The short prioritized post-launch content plan is recorded in the SEO map and has not been implemented. No push or deployment was performed as part of this SEO review.
+
+
+## Current form offer
+
+| Item | Regular starting amount (AMD) | Starting amount with submitted project request (AMD) |
+| --- | ---: | ---: |
+| Business website | 80,000 | 40,000 |
+| Three-language structure | 20,000 | 0 |
+| Blog setup | 20,000 | 10,000 |
+| Product/catalog setup | 30,000 | 15,000 |
+| Each additional page beyond the agreed base | 10,000 | 5,000 |
+| Logo design | 30,000 | 15,000 |
+
+Maintenance is fixed at 15,000 AMD/month and excluded from the discount. Third-party charges are separate. Free language setup covers Armenian, English and Russian structure; translation/content responsibilities are agreed in the quote. Product count, payment integration, shipping and advanced store features are scoped separately. All one-time choices with one additional page: 190,000 AMD regular, 85,000 AMD through the form, with maintenance separate.
+
+The coral offer strip is shared by all pages. Pricing cards use regular struck-through amounts and prominent form-offer amounts. Promotional/enquiry CTAs point to the localized project request form. The previous offer is retired; there is no promotional-code field. The cost articles were substantively updated for these prices and retain their publication date with an actual revision date of 2026-10-14.
+
+Run `npm run test:requests` for trusted pricing, validation and mocked provider/idempotency checks. With preview running, `node scripts/offer-browser-check.mjs` checks all 28 canonical routes at four widths, all-option calculation and transfer, accessible validation, retry retention, mocked failure and mocked success. The success screenshot has a MOCK test reference and is not evidence of live delivery. `npm run check`, build, metadata/link/hosting checks and Wrangler's local Functions compilation remain applicable. Credentials must never be entered into chat, committed or prefixed PUBLIC_. See the setup guide for the exact secure environment and binding names. This task does not push or deploy.

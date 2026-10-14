@@ -10,7 +10,9 @@
     "verify": "node scripts/verify.mjs && node scripts/verify-pages.mjs",
     "test:browser": "node scripts/browser-check.mjs && node scripts/browser-pages.mjs",
     "build:production": "node scripts/build-production.mjs",
-    "verify:hosting": "node scripts/verify-hosting.mjs"
+    "verify:hosting": "node scripts/verify-hosting.mjs",
+    "test:requests": "node --test tests/project-request.test.mjs",
+    "test:offer": "node scripts/offer-browser-check.mjs"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,5 @@
+---
+import {offerCopy} from '../offer-copy';import type {Locale} from '../config';import {translations} from '../i18n';import {calculate,defaultSelection} from '../lib/pricing';
+interface Props{lang:Locale}const {lang}=Astro.props;const o=offerCopy[lang];const q=calculate(defaultSelection);const money=(n:number)=>`${n.toLocaleString(lang)} ${translations[lang].currency}`;
+---
+<section class="live-summary" data-live-summary aria-live="polite" aria-atomic="true"><h3>{o.estimate}</h3><div class="estimate-table-wrap"><table><thead><tr><th>{o.options}</th><th>{o.regular}</th><th>{o.offer}</th></tr></thead><tbody data-summary-rows>{q.rows.map(row=><tr><th scope="row">{o.labels[row.key]} × {row.quantity}</th><td><s>{money(row.regular)}</s></td><td>{money(row.offer)}</td></tr>)}</tbody></table></div><dl><div><dt>{o.regular}</dt><dd data-total-regular>{money(q.regular)}</dd></div><div class="offer-total"><dt>{o.oneTime}</dt><dd data-total-offer>{money(q.offer)}</dd></div><div><dt>{o.savings}</dt><dd data-total-savings>{money(q.savings)}</dd></div><div><dt>{o.monthly}</dt><dd data-total-monthly>—</dd></div></dl><p>{o.note}</p><p>{o.requirement}</p></section>

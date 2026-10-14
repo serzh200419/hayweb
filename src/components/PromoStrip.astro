@@ -1,0 +1,5 @@
+---
+import {offerCopy} from '../offer-copy';import {requestPath} from '../lib/pricing';import type {Locale} from '../config';
+interface Props{lang:Locale}const {lang}=Astro.props;const o=offerCopy[lang];
+---
+<aside class="promo-strip" aria-label={o.strip}><div class="container"><div><strong>{o.strip}</strong><span>{o.stripNote}</span></div><a href={requestPath(lang)}>{o.claim} ↗</a></div></aside>

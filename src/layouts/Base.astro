@@ -1,21 +1,24 @@
 ---
+import PromoStrip from '../components/PromoStrip.astro';
 import '../styles/global.css';
 import '../styles/fonts.css';
 import '../styles/pages.css';
+import '../styles/offer.css';
 import { locales, business, type Locale } from '../config';
 import {translations} from '../i18n';
 import {pageAlternates} from '../routes';
 import {siteConfiguration} from '../../config/site.mjs';
+import {articleText} from '../lib/article-text';
 interface Props {lang: Locale; entry?: boolean; title?:string; description?:string; alternates?:Record<Locale,string>; article?:Record<string,unknown>; breadcrumbs?:{name:string;path:string}[]; noindex?:boolean; notFound?:boolean }
 const {lang, entry = false} = Astro.props;
 const t = translations[lang];
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = absolute(Astro.url.pathname);
 const title = Astro.props.title || (entry ? 'HayWeb — Ընտրեք լեզուն' : t.title);
-const description = Astro.props.description || (entry ? t.intro : t.description);
+const description = articleText(Astro.props.description || (entry ? t.intro : t.description),lang);
 const {verification} = siteConfiguration();
 const alternates = Astro.props.alternates || pageAlternates('home');
 const extra = [Astro.props.article, Astro.props.breadcrumbs ? {'@type':'BreadcrumbList', itemListElement:Astro.props.breadcrumbs.map((b,i)=>({'@type':'ListItem',position:i+1,name:b.name,item:absolute(b.path)}))}:undefined].filter(Boolean);
 const structured = {'@context': 'https://schema.org', '@graph': [ {'@type': 'Organization', '@id': absolute('/#organization'), name: business.name, url: absolute('/'), email: business.email, telephone: business.telephone, sameAs: [business.telegram]}, {'@type': 'WebSite', name: business.name, url: absolute('/'), inLanguage: locales, publisher: {'@id': absolute('/#organization')}}, ...extra ]};
 ---
-<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/>{!Astro.props.notFound && locales.map(l => <link rel="alternate" hreflang={l} href={absolute(alternates[l])}/>)}{!Astro.props.notFound && <link rel="alternate" hreflang="x-default" href={absolute(entry || Astro.url.pathname === `/${lang}/` ? '/' : alternates.hy)}/>}{Astro.props.noindex && <meta name="robots" content="noindex"/>}{verification && <meta name="google-site-verification" content={verification}/>}<link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/><link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/><meta name="theme-color" content="#0B1730"/><meta property="og:type" content={Astro.props.article ? "article" : "website"}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="HayWeb"/><meta property="og:image" content={absolute('/social.png')}/><meta property="og:image:alt" content="HayWeb"/><meta property="og:locale" content={{hy:'hy_AM',en:'en_US',ru:'ru_RU'}[lang]}/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g, '\\u003c')}/></head><body><slot/></body></html>
+<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/>{!Astro.props.notFound && locales.map(l => <link rel="alternate" hreflang={l} href={absolute(alternates[l])}/>)}{!Astro.props.notFound && <link rel="alternate" hreflang="x-default" href={absolute(entry || Astro.url.pathname === `/${lang}/` ? '/' : alternates.hy)}/>}{Astro.props.noindex && <meta name="robots" content="noindex"/>}{verification && <meta name="google-site-verification" content={verification}/>}<link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32"/><link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180"/><meta name="theme-color" content="#0B1730"/><meta property="og:type" content={Astro.props.article ? "article" : "website"}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:site_name" content="HayWeb"/><meta property="og:image" content={absolute('/social.png')}/><meta property="og:image:alt" content="HayWeb"/><meta property="og:locale" content={{hy:'hy_AM',en:'en_US',ru:'ru_RU'}[lang]}/><meta name="twitter:card" content="summary_large_image"/><script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g, '\\u003c')}/></head><body><a class="skip-link" href="#main">{t.skip}</a><PromoStrip lang={lang}/><slot/></body></html>

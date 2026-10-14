@@ -1,11 +1,12 @@
 ---
+import {requestPath} from '../lib/pricing';
 import Wordmark from './Wordmark.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import {navigation} from '../routes';
 import {translations} from '../i18n';
 import {pageCopy} from '../page-copy';
-import {whatsapp,type Locale} from '../config';
+import {type Locale} from '../config';
 interface Props{lang:Locale;alternates?:Record<Locale,string>}
 const {lang,alternates}=Astro.props;const t=translations[lang];const p=pageCopy[lang];
 ---
-<a class="skip-link" href="#main">{t.skip}</a><header class="site-header"><div class="container header-top"><Wordmark lang={lang}/><LanguageSwitcher lang={lang} alternates={alternates}/></div><div class="container header-bottom"><nav class="main-nav" aria-label={p.menu}>{navigation(lang).map((href,i)=><a href={href}>{[...t.nav,p.blog][i]}</a>)}</nav><a class="header-cta" href={whatsapp(t.message)}>{t.quote} ↗</a></div></header>
+<header class="site-header"><div class="container header-top"><Wordmark lang={lang}/><LanguageSwitcher lang={lang} alternates={alternates}/></div><div class="container header-bottom"><nav class="main-nav" aria-label={p.menu}>{navigation(lang).map((href,i)=><a href={href}>{[...t.nav,p.blog][i]}</a>)}</nav><a class="header-cta" href={requestPath(lang)}>{t.quote} ↗</a></div></header>
