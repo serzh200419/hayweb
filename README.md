@@ -130,3 +130,12 @@ Submit the actual `https://<assigned-project>.pages.dev/sitemap.xml` URL through
 The owner must choose an available project name, confirm the real production origin, authorize the GitHub connection when actually deploying, and optionally supply Google's genuine verification token/file. No credentials are needed by the local implementation. Native Armenian/Russian editorial review is still recommended for the idiom of hero/CTA text, technical service terminology, promotion exclusions and article price phrasing. Rendering and translation coverage were checked; native-language accuracy is not certified. A full screen-reader audit and actual Cloudflare edge/header checks have not been performed.
 
 See [the focused pre-launch report](docs/prelaunch-review.md) for observed issues, final checks and local Lighthouse metrics. Lighthouse was temporary QA tooling, not a new application dependency.
+
+
+## Official branding
+
+The supplied official SVGs are preserved unchanged in `public/branding/hayweb-logo.svg` (wordmark) and `hayweb-symbol.svg` (symbol). The shared header/footer home link renders the wordmark with explicit intrinsic dimensions, proportionate responsive sizing, a single HayWeb accessible name and a decorative image with empty alt text. Compact placements use the symbol. For navy contexts, `Wordmark` accepts `onDark` to use a neutral light panel; official lettering and colors are never inverted or recolored.
+
+`favicon.svg` uses the official symbol on a light background for readability in dark browser chrome. PNG fallbacks are `favicon-32.png` and `apple-touch-icon.png`. `social.svg` composes the unchanged official wordmark paths on a light panel over the navy sharing canvas; `social.png` is its real 1200 x 630 raster export. No raster was traced or embedded as pretend vector artwork. The new screenshots in ignored `artifacts/branding-header-*` and `branding-footer-*` capture the header/footer at 390px and 1440px.
+
+Deployment variables remain exactly those in the checklist table above: `NODE_VERSION=24.16.0` for both environments, `HAYWEB_BUILD_TARGET=production` for Production and `preview` for Preview, and `PUBLIC_SITE_URL` set to the same confirmed HTTPS production origin in both. `ASTRO_TELEMETRY_DISABLED=1` is optional and recommended; `GOOGLE_SITE_VERIFICATION` remains unset until Google's genuine content value is supplied. `CF_PAGES` is provided by Cloudflare itself, not an owner-entered variable. No production origin has been assigned in this repository yet.
