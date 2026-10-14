@@ -1,0 +1,11 @@
+---
+import AtelierScene from './AtelierScene.astro';
+interface Props {variant:'desktop'|'phone'}
+const {variant}=Astro.props;
+const copy={brand:'ATELIER',eyebrow:'ARCHITECTURE / INTERIORS',headline:['Spaces made','for living.'],intro:'Thoughtful spaces. A quieter way to live.',cta:'Explore our work',project:'Courtyard House',category:'CONCEPT STUDY / 01'};
+---
+<div class="atelier-screen"><div class:list={['atelier-site',`atelier-site--${variant}`]}>
+ <div class="atelier-nav"><span class="atelier-wordmark">{copy.brand}<i></i></span>{variant==='desktop'?<div class="atelier-nav-items"><span>Projects</span><span>Studio</span><span>Contact ↗</span></div>:<svg width="9" height="9" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 4h10M1 8h7" stroke="currentColor"/></svg>}</div>
+ <div class="atelier-editorial"><div class="atelier-copy"><span class="atelier-eyebrow">{copy.eyebrow}</span><p class="atelier-heading">{copy.headline.map(line=><span>{line}</span>)}</p><p class="atelier-intro">{copy.intro}</p><span class="atelier-cta">{copy.cta}<span>↗</span></span></div><div class="atelier-picture"><AtelierScene/><span class="atelier-picture-index">A / 01</span></div></div>
+ <div class="atelier-project">{variant==='desktop'&&<svg class="atelier-project-thumb" viewBox="0 0 90 58" width="90" height="58" fill="none" aria-hidden="true"><path fill="#e5d8c4" d="M0 0h90v58H0z"/><path fill="#f4eddf" d="M15 12h48v40H15z"/><path fill="#bfa88a" d="m63 12 17 8v32H63z"/><path fill="#263e3f" d="M24 22h29v30H24z"/><path fill="#e8c18b" d="M27 25h9v27h-9z"/><path fill="#bac5ae" d="M40 25h10v27H40z"/><path fill="#647c5e" d="M0 44h17v14H0z"/><path stroke="#eee5d3" d="M38 22v30"/></svg>}<div><small>{copy.category}</small><span>{copy.project}</span></div><span class="atelier-project-arrow">↗</span></div>
+</div></div>

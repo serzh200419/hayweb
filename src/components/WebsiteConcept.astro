@@ -1,12 +1,15 @@
 ---
 import type { Locale } from '../config';
 import { translations } from '../i18n';
+import AtelierSite from './AtelierSite.astro';
+import atelierStyles from '../styles/atelier.css?raw';
 interface Props {lang: Locale}
 const t = translations[Astro.props.lang];
 ---
+<style is:inline set:html={atelierStyles}></style>
 <figure class="concept">
  <svg class="concept-grid" viewBox="0 0 600 500" width="600" height="500" fill="none" aria-hidden="true"><path d="M0 100h600M0 200h600M0 300h600M0 400h600M100 0v500M200 0v500M300 0v500M400 0v500M500 0v500" stroke="currentColor" stroke-width=".5"/><path d="M40 450h100M90 400v100M480 40h60M510 10v60" stroke="currentColor" stroke-width="1.5"/><circle cx="90" cy="450" r="22" stroke="currentColor"/></svg>
- <div class="desktop-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i><span>◈</span></div><div class="demo-page"><div class="demo-nav">{t.demo[0]}<span>≡</span></div><div class="demo-content"><div><small>{t.demo[4]}</small><h2>{t.demo[1]}</h2><p>{t.demo[2]}</p><span class="demo-button">{t.demo[3]} ↗</span></div><div class="interior"><div class="arch"></div><div class="sun"></div><div class="plinth"></div><div class="vase"></div><div class="stem"></div></div></div><div class="demo-bottom"><span>01 / 03</span><span>{t.demo[5]}</span><span>↗</span></div></div></div>
- <div class="phone-frame" aria-hidden="true"><div class="phone-notch"></div><div class="demo-nav">{t.demo[0]}</div><div class="interior"><div class="arch"></div><div class="plinth"></div><div class="vase"></div><div class="stem"></div></div><h3>{t.demo[1]}</h3><span class="demo-button">{t.demo[3]} ↗</span></div>
+ <div class="desktop-frame" aria-hidden="true"><div class="browser-bar"><i></i><i></i><i></i><span>◈</span></div><AtelierSite variant="desktop"/></div>
+ <div class="phone-frame" aria-hidden="true"><div class="phone-notch"></div><AtelierSite variant="phone"/></div>
  <figcaption>{t.concept}</figcaption>
 </figure>
