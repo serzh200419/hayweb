@@ -1,5 +1,6 @@
 ---
+import {articleText} from '../lib/article-text';
 import {readingTime,type Article} from '../articles';import {articleRoute} from '../routes';import {pageCopy} from '../page-copy';
 interface Props{article:Article}const {article:a}=Astro.props;const p=pageCopy[a.lang];
 ---
-<article class="article-card"><p class="eyebrow"><time datetime={a.published}>{new Date(`${a.published}T12:00:00Z`).toLocaleDateString(a.lang,{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'})}</time> · {readingTime(a)} {p.minutes}</p><h2><a href={articleRoute(a.lang,a.slug)}>{a.title}</a></h2><p>{a.description}</p><a class="text-link teal" href={articleRoute(a.lang,a.slug)}>{p.read} ↗</a></article>
+<article class="article-card"><p class="eyebrow"><time datetime={a.published}>{new Date(`${a.published}T12:00:00Z`).toLocaleDateString(a.lang,{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'})}</time> · {readingTime(a)} {p.minutes}</p><h2><a href={articleRoute(a.lang,a.slug)}>{a.title}</a></h2><p>{articleText(a.description,a.lang)}</p><a class="text-link teal" href={articleRoute(a.lang,a.slug)}>{p.read} ↗</a></article>

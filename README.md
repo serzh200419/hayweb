@@ -61,7 +61,7 @@ Informational pages ship no browser JavaScript. Services and Contact progressive
 
 ## Dedicated pages and navigation
 
-For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 22 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Navigation wraps on small screens and needs no JavaScript or hidden menu toggle.
+For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 28 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Navigation wraps on small screens and needs no JavaScript or hidden menu toggle.
 
 `src/page-copy.ts` contains typed new-page translations. `src/layouts/Page.astro` provides page introductions; `SiteHeader` and `SiteFooter` are shared with the preserved homepage. Metadata uses each actual canonical route, with matching page/article language alternatives. Articles include BlogPosting and BreadcrumbList data; dedicated pages have breadcrumbs. The sitemap includes only published pages and articles. The root entry has consistent title/description and social metadata.
 
@@ -79,11 +79,11 @@ The Contact composer accepts optional name, business, URL and promotion code, se
 
 ## Extended QA
 
-After building, run `npm run verify` (includes both verification scripts). It checks all 22 pages, unique page titles/descriptions, self-canonicals, reciprocal translated URLs, structured data, internal paths and anchors, article rendering, sitemap and PNG dimensions.
+After building, run `npm run verify` (includes both verification scripts). It checks all 28 canonical pages, unique page titles/descriptions, self-canonicals, reciprocal translated URLs, structured data, internal paths and anchors, article rendering, sitemap and PNG dimensions.
 
 With preview running, run `npm run test:browser` (runs both browser scripts). The latter covers all seven routes per language at 320, 390, 768 and 1440px, plus equivalent-page/article language switching, keyboard focus, all eight calculator combinations, localized WhatsApp drafts preserving punctuation and newlines, validation, keyboard form submission and no-JavaScript navigation/contact alternatives. WhatsApp requests are intercepted during testing; no enquiry is sent. Screenshots of home, services, contact and one article are captured for every language at 390 and 1440px into ignored `artifacts/`, including viewport-only variants. Inspect representative screenshots manually. This is focused browser QA, not a full screen-reader audit or a production performance measurement.
 
-Latest verification: Astro check reported 0 errors, 0 warnings and 0 hints; the production build now generates 23 pages (22 canonical pages plus the branded 404). Both static verification scripts and both browser scripts passed. All language routes passed overflow checks at 320, 390, 768 and 1440px. Eight calculator combinations and encoded enquiry drafts passed for each locale. Representative desktop/mobile screenshots of the homepage, Services, Contact and an article were manually inspected. No deployment was performed.
+Latest verification: Astro check reported 0 errors, 0 warnings and 0 hints; the production build now generates 29 pages (28 canonical pages plus the branded 404). Both static verification scripts and both browser scripts passed. All language routes passed overflow checks at 320, 390, 768 and 1440px. Eight calculator combinations and encoded enquiry drafts passed for each locale. Representative desktop/mobile screenshots of the homepage, Services, Contact and an article were manually inspected. No deployment was performed.
 
 
 ## Exact Cloudflare Pages deployment checklist
@@ -139,3 +139,16 @@ The supplied official SVGs are preserved unchanged in `public/branding/hayweb-lo
 `favicon.svg` uses the official symbol on a light background for readability in dark browser chrome. PNG fallbacks are `favicon-32.png` and `apple-touch-icon.png`. `social.svg` composes the unchanged official wordmark paths on a light panel over the navy sharing canvas; `social.png` is its real 1200 x 630 raster export. No raster was traced or embedded as pretend vector artwork. The new screenshots in ignored `artifacts/branding-header-*` and `branding-footer-*` capture the header/footer at 390px and 1440px.
 
 Deployment variables remain exactly those in the checklist table above: `NODE_VERSION=24.16.0` for both environments, `HAYWEB_BUILD_TARGET=production` for Production and `preview` for Preview, and `PUBLIC_SITE_URL` set to the same confirmed HTTPS production origin in both. `ASTRO_TELEMETRY_DISABLED=1` is optional and recommended; `GOOGLE_SITE_VERIFICATION` remains unset until Google's genuine content value is supplied. `CF_PAGES` is provided by Cloudflare itself, not an owner-entered variable. No production origin has been assigned in this repository yet.
+
+
+## Focused SEO content and architecture review
+
+The intent, suggested search phrases, rendered titles/descriptions/H1s and relevant internal links for every canonical page are recorded in [docs/seo-page-map.md](docs/seo-page-map.md). Qualitative search wording observations are separated from editorial recommendations; no volumes, difficulty scores or ranking forecasts are claimed. The shared noindex 404 is documented separately.
+
+Two service topics are now available in every language at `/[lang]/services/business-websites/` and `/[lang]/services/multilingual-websites/`. They provide distinct audience guidance, preparation requirements, deliverables, price factors and relevant FAQs, without city/industry doorway pages. `src/service-copy.ts` holds typed translations; the shared route map includes both IDs and the sitemap derives its pages from that map. Descriptive service links appear in the homepage and Services overview; articles link to service details, which link to the existing guides and Contact. Header navigation remains concise. Redesign is retained in the overview pending a more concrete migration/audit offering.
+
+`src/page-meta.ts` defines purpose-specific search titles and a distinct About introduction. Article descriptions now provide a direct opening answer, with prices resolved from the existing business configuration. Article titles, substantive body examples and publication dates were retained; no new article or artificial freshness date was added. The root has a distinct brand/language-entry H1. The reviewed official logos, price configuration, promotion and interactive tools remain intact.
+
+After building, `npm run verify` checks unique H1s, reciprocal language links and x-default, all canonical sitemap URLs and reachability from the root, in addition to the existing metadata/link checks. Run `node scripts/seo-page-map.mjs` to regenerate the page records from built HTML; maintain its intent assignments when adding new pages. `node scripts/seo-browser-check.mjs` checks changed layouts and both service topics at 320, 390 and 1440px across the three languages and captures screenshots in ignored artifacts. The current site has 28 canonical pages plus the branded 404, 29 HTML pages total. Lighthouse was not repeated for these static text/link/CSS changes.
+
+Actual production metadata and Search Console still require the real public origin, a rebuild and live verification. The short prioritized post-launch content plan is recorded in the SEO map and has not been implemented. No push or deployment was performed as part of this SEO review.

@@ -1,0 +1,8 @@
+---
+import {serviceIds,route} from '../routes';
+import {serviceCopy,serviceUi} from '../service-copy';
+import type {Locale} from '../config';
+interface Props{lang:Locale}
+const {lang}=Astro.props;const ui=serviceUi[lang];
+---
+<section class="service-paths" aria-labelledby="service-paths-title"><h2 id="service-paths-title">{ui.prepare}</h2><div class="service-path-grid">{serviceIds.map(id=><article><h3><a href={route(lang,id)}>{serviceCopy[lang][id].h1}</a></h3><p>{ui.summaries[id]}</p><a class="text-link teal" href={route(lang,id)}>{ui.details} ↗</a></article>)}</div></section>

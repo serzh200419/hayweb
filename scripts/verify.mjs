@@ -39,7 +39,7 @@ assert.equal(titles.size,3);
 assert(read('index.html').includes('<html lang="hy">'));
 assert(!read('index.html').includes('http-equiv="refresh"'));
 assert(read('robots.txt').includes(`Sitemap: ${origin}/sitemap.xml`));
-assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,22);
+assert.equal((read('sitemap.xml').match(/<loc>/g)||[]).length,28);
 console.log('PASS root entry, reciprocal language alternatives, sitemap and robots');
 const rgb = h=>h.match(/\w\w/g).map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);
 const luminance=h=>rgb(h).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
