@@ -14,7 +14,7 @@ try {
   await page.keyboard.press('Tab');
   assert.equal(await page.locator(':focus').getAttribute('class'),'skip-link');
   await page.keyboard.press('Enter');
-  const faq=page.locator('summary').first();await faq.focus();await page.keyboard.press('Enter');assert(await page.locator('details').first().getAttribute('open')!==null);
+  const faq=page.locator('.faq summary').first();await faq.focus();await page.keyboard.press('Enter');assert(await page.locator('.faq details').first().getAttribute('open')!==null);
   await page.keyboard.press('Enter');
   await page.locator(':focus').evaluate(el=>el.blur());
   await page.evaluate(()=>scrollTo(0,0));

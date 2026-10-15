@@ -61,7 +61,7 @@ Every page now includes a small, processed decorative module for eligible pointe
 
 ## Dedicated pages and navigation
 
-For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 28 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Navigation wraps on small screens and needs no JavaScript or hidden menu toggle.
+For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 28 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Below 1001px, navigation uses a native details/summary menu that opens without JavaScript. The shared browser module adds Escape, outside-click and breakpoint focus handling. Desktop navigation retains its existing layout.
 
 `src/page-copy.ts` contains typed new-page translations. `src/layouts/Page.astro` provides page introductions; `SiteHeader` and `SiteFooter` are shared with the preserved homepage. Metadata uses each actual canonical route, with matching page/article language alternatives. Articles include BlogPosting and BreadcrumbList data; dedicated pages have breadcrumbs. The sitemap includes only published pages and articles. The root entry has consistent title/description and social metadata.
 
@@ -194,3 +194,7 @@ Missing configuration returns HTTP 503 with exact missing names and a safe serve
 `npm run test:runtime` exercises the real localhost Pages endpoint with empty configuration in all languages and refuses to run when complete credentials exist. `npm run test:requests` uses mock Telegram and KV for rejection, timeout, success, server validation, trusted prices and retry checks. `npm run test:offer` mocks browser responses, including timeout/rejection and retained details. The owner entered credentials privately; after restarting Wrangler, one labeled real TEST returned HTTP 200 with Telegram acceptance and visible success. The owner should confirm its reference in the receiving chat. Production configuration was not changed and production delivery was not tested. No push or deployment was performed.
 
 Local real TEST accepted: `HW-493F353B-FDD9-4F59-8B1F-20CF22B345DB`, `2026-10-14T19:26:44.495Z`. Private credentials are excluded from Git.
+
+## Mobile layout review
+
+See [docs/mobile-review.md](docs/mobile-review.md) for the mobile changes, before/after Lighthouse diagnostics, screenshot links and test limits. With a static preview on port 4330, run `node scripts/mobile-audit.mjs after` and `node scripts/mobile-interactions.mjs`. These layout tests block the request endpoint and never send real Telegram notifications.

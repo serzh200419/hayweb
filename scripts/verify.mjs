@@ -8,7 +8,7 @@ for (const lang of ['hy','en','ru']) {
  const html = read(`${lang}/index.html`);
  assert(html.includes(`<html lang="${lang}">`));
  assert.equal((html.match(/<h1[ >]/g)||[]).length,1);
- assert.equal((html.match(/<details(?:\s[^>]*)?>/g)||[]).length,8);
+ assert.equal((html.match(/<details\s[^>]*id="faq-[^"]*"[^>]*>/g)||[]).length,8);
  assert(html.includes(`rel="canonical" href="${origin}/${lang}/"`));
  for (const l of ['hy','en','ru']) assert(html.includes(`hreflang="${l}" href="${origin}/${l}/"`));
  assert(html.includes(`hreflang="x-default" href="${origin}/"`));
@@ -31,8 +31,8 @@ for (const lang of ['hy','en','ru']) {
   assert(html.includes(formatted),`${lang}: ${price}`);
  }
  for(const [,data] of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)) JSON.parse(data);
- assert.equal((html.match(/<script[^>]+type="module"/g)||[]).length,1,'Only the shared decorative module belongs on homepages');
- console.log(`PASS ${lang}: static content, 8 FAQs, links, metadata, prices, encoded messages, one lightweight decorative module`);
+ assert.equal((html.match(/<script[^>]+type="module"/g)||[]).length,1,'Only the shared navigation/effects module belongs on homepages');
+ console.log(`PASS ${lang}: static content, 8 FAQs, links, metadata, prices, encoded messages, one lightweight navigation/effects module`);
 }
 assert.equal(titles.size,3);
 assert(read('index.html').includes('<html lang="hy">'));
