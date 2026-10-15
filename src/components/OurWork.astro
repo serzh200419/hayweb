@@ -1,0 +1,24 @@
+---
+import {Picture} from 'astro:assets';
+import type {Locale} from '../config';
+import {workCopy,type WorkId} from '../work-copy';
+import bellavita from '../assets/work/bellavita-desktop.png';
+import guys from '../assets/work/525iguys-desktop.png';
+import collision from '../assets/work/corner-collision-desktop.png';
+import '../styles/work.css';
+interface Props{lang:Locale}
+const {lang}=Astro.props;const copy=workCopy[lang];
+const projects=[
+ {id:'bellavita',name:'Bellavita Flowers',url:'https://bellavitaflowers.am',image:bellavita},
+ {id:'525iguys',name:'525iGuys',url:'https://525iguys.com',image:guys},
+ {id:'corner-collision',name:'Corner Collision Center',url:'https://cornercollisioncenter.com',image:collision},
+] satisfies {id:WorkId;name:string;url:string;image:typeof bellavita}[];
+const sizes='(min-width: 1376px) 820px, (min-width: 1001px) 62vw, (min-width: 761px) calc(100vw - 56px), (max-width: 360px) calc(100vw - 32px), calc(100vw - 40px)';
+---
+<section class="work-band" id="work" aria-labelledby="work-title"><div class="section container">
+ <div class="section-heading work-heading"><p class="eyebrow">HayWeb / {copy.title}</p><h2 id="work-title">{copy.title}</h2><p>{copy.intro}</p></div>
+ <div class="work-projects">{projects.map((project,index)=>{const text=copy.projects[project.id];return <article class="work-project" data-project={project.id} aria-labelledby={`work-${project.id}`}>
+  <div class="work-browser"><div class="work-browser-bar" aria-hidden="true"><span class="work-browser-dots"><i></i><i></i><i></i></span><span>{new URL(project.url).hostname}</span><span>↗</span></div><div class="work-screen"><Picture src={project.image} formats={['avif','webp']} fallbackFormat="jpg" widths={[400,800,1200,1600]} width={1600} sizes={sizes} quality={85} loading="lazy" decoding="async" fetchpriority="low" alt={text.alt}/></div></div>
+  <div class="work-description"><p class="work-industry"><span aria-hidden="true">0{index+1} / </span>{text.industry}</p><h3 id={`work-${project.id}`}>{project.name}</h3><p>{text.description}</p><a class="text-link work-visit" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${copy.visit}: ${project.name} (${copy.newTab})`}>{copy.visit}<span aria-hidden="true">↗</span></a></div>
+ </article>})}</div>
+</div></section>

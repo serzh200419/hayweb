@@ -1,0 +1,33 @@
+import {chromium} from '@playwright/test';
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,statSync} from 'node:fs';
+import sharp from 'sharp';
+const base=process.env.PREVIEW_URL||'http://127.0.0.1:4330';
+const projects=[['bellavita','Bellavita Flowers','https://bellavitaflowers.am'],['525iguys','525iGuys','https://525iguys.com'],['corner-collision','Corner Collision Center','https://cornercollisioncenter.com']];
+const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});const results=[];let posts=0;
+try{for(const lang of ['hy','en','ru'])for(const width of [320,390,768,1440]){
+ const page=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('**/api/project-request',r=>{posts++;return r.abort();});
+ await page.addInitScript(()=>{window.__workCLS=0;new PerformanceObserver(list=>{for(const entry of list.getEntries())if(!entry.hadRecentInput)window.__workCLS+=entry.value;}).observe({type:'layout-shift',buffered:true});});
+ const imageRequests=[];page.on('request',r=>{if(/(?:bellavita|525iguys|corner-collision)-desktop/.test(r.url()))imageRequests.push(r.url());});
+ await page.goto(`${base}/${lang}/`);await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(300);const initialRequests=imageRequests.length;
+ assert(await page.evaluate(()=>document.querySelector('#services').nextElementSibling.id==='work'));
+ assert(await page.evaluate(()=>Boolean(document.querySelector('#work').compareDocumentPosition(document.querySelector('#process'))&Node.DOCUMENT_POSITION_FOLLOWING)));
+ assert.equal(await page.locator('#work article').count(),3);assert.equal(await page.locator('#work iframe,#work button').count(),0);
+ assert.equal(await page.locator('link[rel=preload][as=image]').count(),0);
+ const metrics=[];for(const [id,name,url] of projects){const article=page.locator(`[data-project="${id}"]`);assert.equal(await article.locator('h3').innerText(),name);const link=article.locator('a');assert.equal(await link.getAttribute('href'),url);assert.equal(await link.getAttribute('target'),'_blank');assert.equal(await link.getAttribute('rel'),'noopener noreferrer');assert((await link.getAttribute('aria-label')).includes(name));await link.focus();assert.equal(await link.evaluate(e=>getComputedStyle(e).outlineStyle),'solid');assert((await link.boundingBox()).height>=44);
+  const img=article.locator('img');assert.equal(await img.getAttribute('loading'),'lazy');assert.equal(await img.getAttribute('fetchpriority'),'low');assert(await img.getAttribute('width'));assert(await img.getAttribute('height'));assert((await img.getAttribute('alt')).includes(name.split(' ')[0]));assert.equal(await article.locator('source[type="image/avif"]').count(),1);assert.equal(await article.locator('source[type="image/webp"]').count(),1);assert((await img.getAttribute('src')).endsWith('.jpg'));
+  const before=await article.boundingBox();await img.scrollIntoViewIfNeeded();await img.evaluate(e=>e.decode());const after=await article.boundingBox();assert(Math.abs(before.height-after.height)<1,'image load shifted project height');assert.equal(await img.evaluate(e=>getComputedStyle(e).objectFit),'contain');
+  const measurement=await img.evaluate(e=>({src:new URL(e.currentSrc).pathname,width:e.clientWidth,height:e.clientHeight,complete:e.complete&&e.naturalWidth>0}));assert(measurement.complete);const path='dist'+measurement.src;const meta=await sharp(path).metadata();assert(meta.width>=measurement.width*.95);metrics.push({id,...measurement,pixelWidth:meta.width,bytes:statSync(path).size});
+ }
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);
+ if([390,1440].includes(width)){await page.locator(':focus').evaluate(e=>e.blur()).catch(()=>{});await page.locator('#work').screenshot({path:`artifacts/work-${lang}-${width}.png`,style:'.skip-link{visibility:hidden}'});}
+ const cls=await page.evaluate(()=>window.__workCLS);await page.addStyleTag({content:'html{font-size:200% !important}'});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${lang} ${width} 200%`);
+ for(const path of ['services/','about/','contact/','blog/','services/business-websites/']){await page.goto(`${base}/${lang}/${path}`);const nav=width<=1200?'.mobile-menu nav':'.desktop-navigation';if(width<=1200)await page.locator('.mobile-menu summary').click();const link=page.locator(`${nav} a[href="/${lang}/#work"]`);assert(await link.isVisible());await link.click();await page.waitForURL(`${base}/${lang}/#work`);assert(await page.locator('#work').isVisible());}
+ results.push({lang,width,initialImageRequests:initialRequests,cls,metrics,errors});await page.close();
+}
+for(const lang of ['hy','en','ru']){const page=await browser.newPage({viewport:{width:390,height:844},javaScriptEnabled:false});await page.goto(`${base}/${lang}/`);assert.equal(await page.locator('#work article').count(),3);await page.locator('#work').scrollIntoViewIfNeeded();for(const img of await page.locator('#work img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(e=>e.decode());assert(await img.isVisible());}await page.close();}
+// Test 2x screens separately; local generated pixels should cover the displayed dimensions.
+for(const width of [390,1440]){const page=await browser.newPage({viewport:{width,height:1000},deviceScaleFactor:2,reducedMotion:'reduce'});await page.goto(base+'/en/');for(const img of await page.locator('#work img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(e=>e.decode());const m=await img.evaluate(e=>({src:new URL(e.currentSrc).pathname,width:e.clientWidth}));const meta=await sharp('dist'+m.src).metadata();assert(meta.width>=m.width*2*.95);}await page.close();}
+assert.equal(posts,0);writeFileSync('artifacts/work-browser-results.json',JSON.stringify({results,posts},null,2));console.log('PASS portfolio: all locales at 320/390/768/1440, correct order/assets/links, 200% text, no-JS, 2x sharpness, stable image dimensions, no overflow/errors/real submissions');
+const html=readFileSync('dist/en/index.html','utf8');const assets=[...new Set([...html.matchAll(/\/_astro\/[^\s"<>]+\.(?:avif|webp|jpg)/g)].map(m=>m[0]))];const inventory=[];for(const url of assets){const path='dist'+url;const m=await sharp(path).metadata();inventory.push({url,width:m.width,height:m.height,format:m.format,bytes:statSync(path).size});}writeFileSync('artifacts/work-image-inventory.json',JSON.stringify(inventory,null,2));console.log(`Generated image inventory: ${inventory.length} local variants`);
+}finally{await browser.close();}

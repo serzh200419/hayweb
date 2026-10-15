@@ -1,9 +1,13 @@
 import {locales, type Locale} from './config';
+import {workCopy} from './work-copy';
+import {translations} from './i18n';
+import {pageCopy} from './page-copy';
 export const serviceIds = ['business-websites','multilingual-websites'] as const;
 export type ServiceId = typeof serviceIds[number];
 export const pageIds = ['home','services','about','contact','blog',...serviceIds] as const;
 export type PageId = typeof pageIds[number];
 export const route = (lang:Locale, page:PageId='home') => `/${lang}/${page==='home'?'':serviceIds.some(id=>id===page)?'services/'+page+'/':page+'/'}`;
 export const articleRoute = (lang:Locale,slug:string) => `${route(lang,'blog')}${slug}/`;
-export const navigation = (lang:Locale) => [route(lang,'services'),`${route(lang)}#process`,`${route(lang)}#pricing`,route(lang,'about'),`${route(lang)}#faq`,route(lang,'contact'),route(lang,'blog')];
+export const navigation = (lang:Locale) => [route(lang,'services'),`${route(lang)}#work`,`${route(lang)}#process`,`${route(lang)}#pricing`,route(lang,'about'),`${route(lang)}#faq`,route(lang,'contact'),route(lang,'blog')];
+export const navigationItems=(lang:Locale)=>{const labels=[translations[lang].nav[0],workCopy[lang].title,...translations[lang].nav.slice(1),pageCopy[lang].blog];return navigation(lang).map((href,i)=>({href,label:labels[i]}));};
 export const pageAlternates = (page:PageId) => Object.fromEntries(locales.map(l=>[l,route(l,page)])) as Record<Locale,string>;

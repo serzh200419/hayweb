@@ -1,11 +1,11 @@
 ---
 import Wordmark from './Wordmark.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import {navigation} from '../routes';
+import {navigationItems} from '../routes';
 import {translations} from '../i18n';
 import {pageCopy} from '../page-copy';
 import {business,type Locale} from '../config';
 interface Props{lang:Locale;alternates?:Record<Locale,string>}
 const {lang,alternates}=Astro.props;const t=translations[lang];
 ---
-<footer class="studio-footer"><div class="container footer-inner"><div class="footer-top"><div><Wordmark lang={lang} onDark/><p>{t.footer}</p></div><nav aria-label={pageCopy[lang].menu}>{navigation(lang).map((href,i)=><a href={href}>{[...t.nav,pageCopy[lang].blog][i]}</a>)}</nav><div><LanguageSwitcher lang={lang} alternates={alternates}/><a href={`mailto:${business.email}`}>{business.email}</a><a href={`tel:${business.telephone}`}>{business.phone}</a></div></div><div class="footer-bottom"><span>© {new Date().getUTCFullYear()} HayWeb. {t.rights}</span><span>HayWeb</span></div></div></footer>
+<footer class="studio-footer"><div class="container footer-inner"><div class="footer-top"><div><Wordmark lang={lang} onDark/><p>{t.footer}</p></div><nav aria-label={pageCopy[lang].menu}>{navigationItems(lang).map(item=><a href={item.href}>{item.label}</a>)}</nav><div><LanguageSwitcher lang={lang} alternates={alternates}/><a href={`mailto:${business.email}`}>{business.email}</a><a href={`tel:${business.telephone}`}>{business.phone}</a></div></div><div class="footer-bottom"><span>© {new Date().getUTCFullYear()} HayWeb. {t.rights}</span><span>HayWeb</span></div></div></footer>

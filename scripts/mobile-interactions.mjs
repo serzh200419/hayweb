@@ -14,7 +14,7 @@ try{
    await page.setViewportSize({width,height:844});await page.goto(`${base}/${lang}/`);
    const summary=page.locator('.mobile-menu summary');const menu=page.locator('.mobile-menu');
    await summary.focus();await page.keyboard.press('Enter');assert(await menu.evaluate(e=>e.open));
-   assert.equal(await page.locator('.mobile-menu nav a:visible').count(),7);
+   assert.equal(await page.locator('.mobile-menu nav a:visible').count(),8);
    await fit(page,`${lang} menu ${width}`);
    assert(await summary.evaluate(e=>e.getBoundingClientRect().height>=44));
    await page.keyboard.press('Tab');assert.equal(await page.locator(':focus').getAttribute('href'),`/${lang}/services/`);
@@ -42,7 +42,7 @@ try{
    const article={hy:'biznes-kayqi-arjeq',en:'business-website-cost',ru:'stoimost-saita-dlya-biznesa'}[lang];await page.goto(`${base}/${lang}/blog/${article}/`);await page.screenshot({path:`artifacts/mobile-${lang}-article-${width}.png`});await page.locator('.article-body').screenshot({path:`artifacts/mobile-${lang}-article-body-${width}.png`});
   }
   await page.close();
-  const nojs=await browser.newPage({viewport:{width:320,height:844},javaScriptEnabled:false});for(const route of ['','services/','services/business-websites/','services/multilingual-websites/','about/','contact/','blog/']){await nojs.goto(`${base}/${lang}/${route}`);await nojs.locator('.mobile-menu summary').click();assert.equal(await nojs.locator('.mobile-menu nav a:visible').count(),7);await fit(nojs,`${lang} no JS ${route}`);if(route===''){await nojs.locator('.faq summary').first().click();assert(await nojs.locator('.faq details').first().evaluate(e=>e.open));}if(route==='contact/'){assert(await nojs.locator('form').isHidden());assert(await nojs.locator('a[href^="mailto:"]:visible').count()>0);}}await nojs.close();
+  const nojs=await browser.newPage({viewport:{width:320,height:844},javaScriptEnabled:false});for(const route of ['','services/','services/business-websites/','services/multilingual-websites/','about/','contact/','blog/']){await nojs.goto(`${base}/${lang}/${route}`);await nojs.locator('.mobile-menu summary').click();assert.equal(await nojs.locator('.mobile-menu nav a:visible').count(),8);await fit(nojs,`${lang} no JS ${route}`);if(route===''){await nojs.locator('.faq summary').first().click();assert(await nojs.locator('.faq details').first().evaluate(e=>e.open));}if(route==='contact/'){assert(await nojs.locator('form').isHidden());assert(await nojs.locator('a[href^="mailto:"]:visible').count()>0);}}await nojs.close();
  }
  for(const width of [320,390,768,844]){
   const page=await browser.newPage({viewport:{width,height:width===844?390:900},hasTouch:true,reducedMotion:'reduce'});

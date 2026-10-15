@@ -2,7 +2,7 @@
 import {requestPath} from '../lib/pricing';
 import Wordmark from './Wordmark.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import {navigation} from '../routes';
+import {navigationItems} from '../routes';
 import {translations} from '../i18n';
 import {pageCopy} from '../page-copy';
 import {type Locale} from '../config';
@@ -10,4 +10,4 @@ import {mobileCopy} from '../mobile-copy';
 interface Props{lang:Locale;alternates?:Record<Locale,string>}
 const {lang,alternates}=Astro.props;const t=translations[lang];const p=pageCopy[lang];
 ---
-<header class="site-header"><div class="container header-top"><Wordmark lang={lang}/><LanguageSwitcher lang={lang} alternates={alternates}/></div><div class="container header-bottom desktop-navigation"><nav class="main-nav" aria-label={p.menu}>{navigation(lang).map((href,i)=><a href={href}>{[...t.nav,p.blog][i]}</a>)}</nav><a class="header-cta" href={requestPath(lang)}>{t.quote} ↗</a></div><div class="container mobile-navigation"><a class="mobile-enquiry" href={requestPath(lang)}>{t.quote} ↗</a><details class="mobile-menu"><summary>{mobileCopy[lang].menu}<span aria-hidden="true">+</span></summary><nav aria-label={p.menu}>{navigation(lang).map((href,i)=><a href={href}>{[...t.nav,p.blog][i]}</a>)}</nav></details></div></header>
+<header class="site-header"><div class="container header-top"><Wordmark lang={lang}/><LanguageSwitcher lang={lang} alternates={alternates}/></div><div class="container header-bottom desktop-navigation"><nav class="main-nav" aria-label={p.menu}>{navigationItems(lang).map(item=><a href={item.href}>{item.label}</a>)}</nav><a class="header-cta" href={requestPath(lang)}>{t.quote} ↗</a></div><div class="container mobile-navigation"><a class="mobile-enquiry" href={requestPath(lang)}>{t.quote} ↗</a><details class="mobile-menu"><summary>{mobileCopy[lang].menu}<span aria-hidden="true">+</span></summary><nav aria-label={p.menu}>{navigationItems(lang).map(item=><a href={item.href}>{item.label}</a>)}</nav></details></div></header>
