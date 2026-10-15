@@ -1,0 +1,106 @@
+/* Page typography uses rem tokens; the fictional ATELIER site has its own scale. */
+:root{
+ --text-body:1.125rem;
+ --text-lead:1.3125rem;
+ --text-nav:1rem;
+ --text-button:1.0625rem;
+ --text-question:1.1875rem;
+ --text-answer:1.125rem;
+ --text-label:1rem;
+ --text-support:1.03125rem;
+ --text-meta:.90625rem;
+ --weight-body:400;
+ --weight-nav:550;
+ --weight-control:600;
+ --line-body:1.65;
+}
+html[lang=hy]{--weight-body:450}
+body{font-size:var(--text-body);font-weight:var(--weight-body);line-height:var(--line-body)}
+p{line-height:var(--line-body)}
+main h1,main h2,main h3,main p,main li,main a,main summary,main label,main dt,main dd{overflow-wrap:anywhere}
+.hero-copy{min-width:0}
+.lead,.hero .lead,.page-hero .lead,.article-description{font-size:var(--text-lead);line-height:1.6;max-width:52ch}
+.hero .lead{max-width:44ch}
+.main-nav,.mobile-menu nav a,.mobile-menu summary,.mobile-enquiry,.header-cta,.site-header .languages,.footer-top>nav,.footer-top>div:last-child,.footer-top .languages{font-size:var(--text-nav);font-weight:var(--weight-nav);line-height:1.5;letter-spacing:normal}
+.main-nav{gap:12px 24px}
+.main-nav a,.header-cta{min-height:44px;display:inline-flex;align-items:center}
+.header-bottom{flex-wrap:wrap;padding-block:10px;gap:12px 24px}
+.header-cta{white-space:normal}
+.button,.hero .button,.composer button[type=submit]{font-size:var(--text-button);font-weight:650;line-height:1.5;min-height:48px;white-space:normal;max-width:100%}
+.text-link,.hero .text-link,.price-link,.price-card .price-link,.service a,.detail-contact{font-size:var(--text-nav);line-height:1.6;min-height:44px;max-width:100%;overflow-wrap:anywhere}
+.hero-offer,.hero-note,.maintenance-price,.maintenance-price span,.option-scope,.project-options small,.project-options .option-scope,.acknowledgement,.panel>p,.composer .field.full,.live-summary p,.estimate fieldset p,.estimate form>p,.submission-status,.error-summary ul,.entry-note,.scope-note,.detail-terms{font-size:var(--text-support);line-height:var(--line-body);letter-spacing:normal}
+.hero-note{max-width:48ch}
+.offer-promotion ul,.promotion ul,.promotion p{font-size:var(--text-support);line-height:var(--line-body)}
+.contact-links strong,.enquiry-layout .contact-links strong{font-size:var(--text-support);font-weight:var(--weight-nav);line-height:1.6}
+.contact-links a>span:first-child{font-size:var(--text-meta);line-height:1.6}
+.steps h3,.benefit h3,.service h3{font-size:1.25rem;line-height:1.5}
+.benefit p,.service p,.steps p,.about p:last-child,.contact p:not(.eyebrow),.principles p,.group-need,.service-path-grid p,.service-details p,.service-details li,.article-card>p:not(.eyebrow),.enquiry-layout aside>p,.article-body p,.article-cta p,.footer-top p,.entry-card .lead{font-size:var(--text-body);line-height:var(--line-body)}
+.service p,.benefit p,.principles p,.service-details p,.article-body p{max-width:68ch}
+.article-body{max-width:740px}
+.features ul,.check,.project-options legend,.estimate legend{font-size:var(--text-support);line-height:var(--line-body)}
+.check{min-height:48px;align-items:flex-start}
+.check input{flex-shrink:0}
+.field label{font-size:var(--text-label);font-weight:var(--weight-control);line-height:1.6;letter-spacing:normal}
+.field input,.field select,.field textarea,input:not([type=checkbox]),select,textarea{font-size:var(--text-label);line-height:1.5;min-height:48px}
+.faq summary,.detail-bottom summary{font-size:var(--text-question);line-height:1.55;font-weight:600;align-items:flex-start}
+.faq summary span,.detail-bottom summary span{flex-shrink:0;line-height:1.5}
+.faq details p,.detail-bottom details p{font-size:var(--text-answer);line-height:var(--line-body)}
+.faq details p{padding-right:0}
+.faq-list,.faq-list details,.faq>*,.service-details>*,.detail-bottom>*,.features>*,.features li,.service-path-grid>*,.about-intro>*,.principles>*{min-width:0}
+.regular-price,.offer-price,.offer-condition,.price-card .regular-price,.price-card .offer-price,.price-card .offer-condition{font-size:var(--text-support)!important;line-height:var(--line-body)}
+.price-card h3{min-height:0;font-size:1.25rem;line-height:1.5}
+.live-summary table,.live-summary dl,.live-summary .offer-total,.composer .live-summary .offer-total{font-size:var(--text-support);line-height:1.6}
+.live-summary dd{font-size:var(--text-support)}
+.live-summary .offer-total dd{font-size:1.4rem}
+.live-summary table{min-width:440px}
+.estimate-table-wrap{overflow-x:auto;overscroll-behavior-inline:contain}
+.estimate-scroll-hint{display:block;font-size:var(--text-meta)!important}
+.live-summary dl>div{flex-wrap:wrap}
+.promo-strip strong,.promo-strip span,.promo-strip a{font-size:var(--text-meta);line-height:1.55;letter-spacing:normal;overflow-wrap:anywhere}
+.promo-strip a{min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center}
+.eyebrow,.hero .eyebrow,.breadcrumbs,.article-date,.footer-bottom,.hero-line,.concept figcaption,.index,.benefit .index,.entry-choice p{font-size:var(--text-meta);line-height:1.6}
+html[lang=hy] .eyebrow,html[lang=hy] .hero .eyebrow,html[lang=hy] .hero-line{letter-spacing:.025em}
+.footer-top>nav{gap:8px 20px}
+.footer-top>*{min-width:0}
+.footer-top a{overflow-wrap:anywhere}
+.footer-top .languages{max-width:100%;flex-wrap:wrap}
+.footer-top>nav a,.footer-top>div:last-child>a,.footer-top .languages a{min-height:44px;display:flex;align-items:center;line-height:1.6}
+.footer-top p{max-width:34ch}
+.entry-card .languages{font-size:var(--text-nav)}
+.entry-card .languages a,.entry-choice .languages a{font-size:var(--text-nav);line-height:1.6}
+.atelier-site{font-size:1rem;line-height:normal;font-weight:400}
+@media(max-width:1200px){
+ .site-header{position:relative;z-index:3}
+ .site-header .desktop-navigation{display:none}
+ .mobile-navigation{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:8px 12px}
+ .mobile-enquiry{min-width:0;overflow-wrap:anywhere;min-height:44px;display:inline-flex;align-items:center;padding-block:8px}
+ .mobile-menu{flex-shrink:0}
+ .mobile-menu summary{min-height:44px;gap:18px;padding:8px 12px;border:1px solid var(--studio-border);border-radius:3px}
+ .mobile-menu nav{position:absolute;top:100%;left:0;right:0;background:var(--paper);border-block:1px solid var(--studio-border);padding:12px 28px;box-shadow:0 12px 18px #0b173012;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 20px}
+ .mobile-menu nav a{min-width:0;min-height:48px;display:flex;align-items:center;padding:10px 4px;overflow-wrap:anywhere}
+}
+@media(max-width:1000px){
+ .service-details,.detail-bottom,.principles{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ :root{--text-body:1.09375rem;--text-lead:1.125rem;--text-question:1.125rem;--text-answer:1.09375rem;--text-support:1rem}
+ .hero .actions{gap:12px 20px}
+ .site-header .languages{font-size:var(--text-meta);gap:12px}
+ .site-header .languages a{min-height:44px}
+ .header-top{row-gap:4px}
+ .promo-strip>.container{grid-template-columns:minmax(0,1fr) 120px}
+ .promo-strip a{width:120px;padding:10px}
+ .promo-strip span{margin-top:6px}
+ .maintenance-price{flex-direction:column;gap:12px}
+ .live-summary dl>div{display:grid;grid-template-columns:minmax(0,1fr)}
+ .live-summary dd{text-align:left;overflow-wrap:anywhere}
+ .service-details,.detail-bottom,.principles{grid-template-columns:minmax(0,1fr)}
+ .features ul{grid-template-columns:minmax(0,1fr)}
+ .hero-line{letter-spacing:normal}
+ .concept figcaption{font-size:var(--text-meta);max-width:60%;line-height:1.5}
+}
+@media(max-width:360px){
+ .promo-strip>.container{grid-template-columns:minmax(0,1fr)}
+ .promo-strip a{width:auto;justify-self:start;padding-inline:16px}
+ .mobile-menu nav{grid-template-columns:minmax(0,1fr);padding-inline:16px}
+}

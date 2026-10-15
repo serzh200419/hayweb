@@ -61,7 +61,7 @@ Every page now includes a small, processed decorative module for eligible pointe
 
 ## Dedicated pages and navigation
 
-For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 28 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Below 1001px, navigation uses a native details/summary menu that opens without JavaScript. The shared browser module adds Escape, outside-click and breakpoint focus handling. Desktop navigation retains its existing layout.
+For each of `hy`, `en`, `ru`: homepage, `services/`, `about/`, `contact/`, `blog/`, and two localized `blog/[slug]/` articles. There are 28 canonical HTML pages including the Armenian root entry, plus a branded top-level `404.html` excluded from the sitemap. `src/routes.ts` defines page IDs and route builders. The header and footer use dedicated page links; process, pricing and FAQ link to homepage anchors. Below 1201px, navigation uses a native details/summary menu that opens without JavaScript. The shared browser module adds Escape, outside-click and breakpoint focus handling. Desktop navigation retains its existing layout.
 
 `src/page-copy.ts` contains typed new-page translations. `src/layouts/Page.astro` provides page introductions; `SiteHeader` and `SiteFooter` are shared with the preserved homepage. Metadata uses each actual canonical route, with matching page/article language alternatives. Articles include BlogPosting and BreadcrumbList data; dedicated pages have breadcrumbs. The sitemap includes only published pages and articles. The root entry has consistent title/description and social metadata.
 
@@ -198,3 +198,5 @@ Local real TEST accepted: `HW-493F353B-FDD9-4F59-8B1F-20CF22B345DB`, `2026-10-14
 ## Mobile layout review
 
 See [docs/mobile-review.md](docs/mobile-review.md) for the mobile changes, before/after Lighthouse diagnostics, screenshot links and test limits. With a static preview on port 4330, run `node scripts/mobile-audit.mjs after` and `node scripts/mobile-interactions.mjs`. These layout tests block the request endpoint and never send real Telegram notifications.
+
+Typography tokens, measured before/after styles, font-loading review and matched hero/FAQ screenshots are documented in [docs/typography-review.md](docs/typography-review.md). Run `node scripts/typography-check.mjs after` against the static preview to repeat the focused checks.
