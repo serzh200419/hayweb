@@ -1,8 +1,9 @@
 ---
+import FaqList from '../../components/FaqList.astro';
 import PricingGrid from '../../components/PricingGrid.astro';
 import {requestPath} from '../../lib/pricing';
 import ServiceLinks from '../../components/ServiceLinks.astro';
 import Page from '../../layouts/Page.astro';import Estimate from '../../components/Estimate.astro';import {locales,type Locale} from '../../config';import {translations} from '../../i18n';import {pageCopy} from '../../page-copy';
 export function getStaticPaths(){return locales.map(lang=>({params:{lang}}));}const lang=Astro.params.lang as Locale;const t=translations[lang];const p=pageCopy[lang];
 ---
-<Page lang={lang} page="services"><div class="container section service-groups"><ServiceLinks lang={lang}/>{p.groups.map(([title,need,deliverables,scope],i)=><section class="service-group"><div><p class="eyebrow">0{i+1}</p><h2>{title}</h2><p class="group-need">{need}</p></div><div><p>{deliverables}</p><p class="scope-note">{scope}</p><a class="text-link teal" href={requestPath(lang)}>{t.quote} ↗</a></div></section>)}</div><section class="section soft"><div class="container"><div class="section-heading"><h2>{t.pricingTitle}</h2><p>{t.pricingIntro}</p></div><PricingGrid lang={lang}/><Estimate lang={lang}/></div></section></Page>
+<Page lang={lang} page="services"><div class="container section service-groups"><ServiceLinks lang={lang}/>{p.groups.map(([title,need,deliverables,scope],i)=><section class="service-group"><div><p class="eyebrow">0{i+1}</p><h2>{title}</h2><p class="group-need">{need}</p></div><div><p>{deliverables}</p><p class="scope-note">{scope}</p><a class="text-link teal" href={requestPath(lang)}>{t.quote} ↗</a></div></section>)}</div><section class="section soft"><div class="container"><div class="section-heading"><h2>{t.pricingTitle}</h2><p>{t.pricingIntro}</p></div><PricingGrid lang={lang}/><Estimate lang={lang}/></div></section><section class="faq-band" id="faq"><div class="section container faq"><div class="section-heading"><h2>{t.faqTitle}</h2></div><FaqList lang={lang} ids={['website-cost','monthly-costs','add-ons']}/></div></section></Page>

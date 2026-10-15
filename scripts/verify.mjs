@@ -8,7 +8,7 @@ for (const lang of ['hy','en','ru']) {
  const html = read(`${lang}/index.html`);
  assert(html.includes(`<html lang="${lang}">`));
  assert.equal((html.match(/<h1[ >]/g)||[]).length,1);
- assert.equal((html.match(/<details>/g)||[]).length,8);
+ assert.equal((html.match(/<details(?:\s[^>]*)?>/g)||[]).length,8);
  assert(html.includes(`rel="canonical" href="${origin}/${lang}/"`));
  for (const l of ['hy','en','ru']) assert(html.includes(`hreflang="${l}" href="${origin}/${l}/"`));
  assert(html.includes(`hreflang="x-default" href="${origin}/"`));

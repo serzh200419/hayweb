@@ -1,0 +1,21 @@
+import {chromium} from '@playwright/test';import assert from 'node:assert/strict';import {readFileSync,writeFileSync} from 'node:fs';
+import {faqIds} from '../src/faqs.ts';
+const base=process.env.PREVIEW_URL||'http://127.0.0.1:4330';
+const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'});
+const ids={home:faqIds,services:['website-cost','monthly-costs','add-ons'],contact:['timeline-materials','after-request']};let posts=0;
+const copy={};
+try{for(const lang of ['en','hy','ru'])for(const width of [320,390,768,1440])for(const pageName of ['home','services','contact']){
+ const page=await browser.newPage({viewport:{width,height:1000},javaScriptEnabled:false,reducedMotion:'reduce'});const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('**/api/project-request',r=>{posts++;return r.abort();});
+ const path=`/${lang}/${pageName==='home'?'':pageName+'/'}`;assert.equal((await page.goto(base+path)).status(),200);await page.evaluate(()=>document.fonts.ready);
+ const details=page.locator('#faq details');assert.deepEqual(await details.evaluateAll(nodes=>nodes.map(n=>n.id)),ids[pageName].map(id=>'faq-'+id));
+ const html=readFileSync(`dist${path}index.html`,'utf8');assert(!html.includes('FAQPage'));assert(!html.includes('[form]'));assert(!/\{(?:website|maintenance|percent|pageDiscount|blogDiscount|commerceDiscount)/.test(html));
+ for(const detail of await details.all()){const summary=detail.locator('summary');await summary.focus();assert.equal(await summary.evaluate(el=>getComputedStyle(el).outlineStyle),'solid');await page.keyboard.press('Enter');assert(await detail.getAttribute('open')!==null);assert(await detail.locator('[data-faq-answer]').isVisible());await page.keyboard.press('Space');assert.equal(await detail.getAttribute('open'),null);}
+ for(const link of await page.locator('#faq a').all()){const href=await link.getAttribute('href');assert(href.startsWith('/'+lang+'/'));if(href.includes('/contact/'))assert.equal(href,`/${lang}/contact/#project-request`);else assert(href.includes('/blog/'));assert.equal((await page.request.get(base+href.split('#')[0])).status(),200);}
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`${lang} ${width} ${pageName} overflow`);assert.deepEqual(errors,[]);
+ if(pageName==='home'&&width===390){copy[lang]=await details.evaluateAll(nodes=>nodes.map(n=>{const summary=n.querySelector('summary').cloneNode(true);summary.querySelector('[aria-hidden]').remove();return{id:n.id,question:summary.textContent.trim(),answer:n.querySelector('[data-faq-answer]').textContent.trim(),guides:[...n.querySelectorAll('a')].filter(a=>a.pathname.includes('/blog/')).map(a=>({text:a.textContent,href:a.getAttribute('href')}))};}));const answers=copy[lang].map(x=>x.answer);for(const amount of [80000,40000])assert(answers[0].replace(/\D/g,'').includes(String(amount)));assert(answers[2].replace(/\D/g,'').includes('15000'));for(const amount of [5000,10000,15000])assert(answers[6].replace(/\D/g,'').includes(String(amount)));}
+ if(pageName==='home'&&[390,1440].includes(width)){for(const detail of (await details.all()).slice(0,3))await detail.locator('summary').click();await page.locator('#faq').screenshot({path:`artifacts/faq-${lang}-${width}.png`,style:'.skip-link{visibility:hidden}'});}
+ await page.close();
+}assert.equal(posts,0);let doc='# Final HayWeb FAQ copy\n\nGenerated from the rendered static HTML. All prices resolve from the existing centralized configuration. The same stable question IDs are used in all languages; [form] links in source render as localized Contact form links. No FAQ structured data or browser JavaScript was added.\n\n';
+ for(const lang of ['en','hy','ru']){doc+=`## ${{en:'English',hy:'Հայերեն',ru:'Русский'}[lang]}\n\n`;for(const [i,faq] of copy[lang].entries()){doc+=`### ${i+1}. ${faq.question}\n\n${faq.answer}\n\n`;for(const guide of faq.guides)doc+=`[${guide.text}](${guide.href})\n\n`;}}
+ writeFileSync('docs/final-faq-copy.md',doc.trimEnd()+'\n');console.log('PASS: all 3 languages and home/Services/Contact at 320/390/768/1440, stable IDs/order, prices, localized form/article links, native Enter/Space, focus, all answers with JS disabled, no overflow/errors/notifications.');
+}finally{await browser.close();}

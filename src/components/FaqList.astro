@@ -1,0 +1,14 @@
+---
+import {faqsFor,faqGuideLabels,type FaqId} from '../faqs';
+import type {Locale} from '../config';
+import {articleText} from '../lib/article-text';
+import {requestPath} from '../lib/pricing';
+import {publishedArticles} from '../articles';
+import {articleRoute} from '../routes';
+interface Props {lang:Locale;ids?:readonly FaqId[]}
+const {lang,ids}=Astro.props;
+const entries=faqsFor(lang,ids);
+const answerParts=(answer:string)=>answer.split(/(\[form\][\s\S]*?\[\/form\])/g).map(text=>({form:text.startsWith('[form]'),text:articleText(text.replace(/^\[form\]|\[\/form\]$/g,''),lang)}));
+const guide=(id:'website-cost'|'social-website')=>{const article=publishedArticles.find(a=>a.lang===lang&&a.id===id);if(!article)throw Error('Missing FAQ guide translation');return articleRoute(lang,article.slug);};
+---
+<div class="faq-list">{entries.map(entry=><details id={`faq-${entry.id}`}><summary>{articleText(entry.question,lang)}<span aria-hidden="true">+</span></summary><p data-faq-answer>{answerParts(entry.answer).map(part=>part.form?<a class="teal" style="text-decoration:underline;text-underline-offset:3px" href={requestPath(lang)}>{part.text}</a>:part.text)}</p>{entry.related&&<p><a class="text-link teal" style="display:inline-block" href={guide(entry.related)}>{faqGuideLabels[lang][entry.related]} ↗</a></p>}</details>)}</div>
